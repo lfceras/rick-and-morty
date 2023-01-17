@@ -1,0 +1,2 @@
+export const GET_ALL_CHARACTERS = "GET_ALL_CHARACTERS" 
+export const GET_DETAILS = "GET_DETAILS"

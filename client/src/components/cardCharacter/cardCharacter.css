@@ -1,0 +1,105 @@
+.cards{
+  background-color: transparent;
+  height: 280px;
+  width: 280px;
+  perspective: 1000px;
+}
+
+.flit-card-inner{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
+
+.cards:hover .flit-card-inner{
+  transform: rotateY(180deg);
+}
+
+.flit-card-front,
+.flit-card-back{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 16px;
+}
+
+.flit-card-front{
+  background-image: linear-gradient(45deg);
+}
+
+.flit-card-front img{
+  width: 290px;
+  border-radius: 25px 0 25px 0;
+  margin-bottom: 10px;
+  height: 350px;
+}
+
+.flit-card-back{
+  background-image: linear-gradient(315deg, #636264, #0c0c0c);
+  color: black;
+  transform: rotateY(180deg);
+  height: 350px;
+}
+
+.flit-card-back img{
+  width: 170px;
+  margin-top: 1rem;
+  margin-bottom: 4rem;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.flit-card-back label{
+  margin-bottom: 0.3rem;
+}
+
+.letters{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.cards label{
+  font-size: 30px;
+  font-weight: 600;
+ font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+ cursor: pointer;
+}
+
+.cards span{
+  font-size: 20px;
+  font-weight: 500;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.link2{
+  color: black;
+  text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+/* .cards img{
+  width: 250px;
+  border-radius: 25px 0 25px 0;
+  margin-bottom: 10px;
+} */
+
+/* 
+
+
+
+
+ */
