@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getDetails } from "../../redux/actions/actions";
+import { cleanDetails, getDetails } from "../../redux/actions/actions";
 import NavBar from "../navBar/NavBar";
 import "./details.css";
 
@@ -10,11 +10,12 @@ const CharacterDetail = () => {
   // console.log(id);
 
   const detalles = useSelector((state) => state.detalles);
-  console.log(detalles);
+  // console.log(detalles);
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getDetails(id));
+    return ()=>{dispatch(cleanDetails())}
   }, []);
   return (
     <div>

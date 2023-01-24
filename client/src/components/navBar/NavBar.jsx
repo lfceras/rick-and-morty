@@ -42,7 +42,7 @@ const NavBar = () => {
             <CreateCharacter />
           </Link>
           <Link to={"/favorites"} className="link">
-            <Favorites />
+            Favorites
             <BsFillHeartFill className="heart"/>
           </Link>
         <div>

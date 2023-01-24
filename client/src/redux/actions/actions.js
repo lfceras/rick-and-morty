@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GET_ALL_CHARACTERS, GET_DETAILS } from '../actionsType/actionsType'
+import { ADD_FAVORITE, CLEAR_DETAILS, DELETE_FAVORITE, GET_ALL_CHARACTERS, GET_BY_NAME, GET_DETAILS } from '../actionsType/actionsType'
 
 export const getAllCharacters = ()=>{
   return async (dispatch)=>{
@@ -18,5 +18,37 @@ export const getDetails = (id)=>{
       type: GET_DETAILS,
       payload: dts.data[0]
     })
+  }
+}
+
+export const cleanDetails = ()=>{
+  return (dispatch)=>{
+    dispatch({
+      type: CLEAR_DETAILS
+    })
+  }
+}
+
+export const getByName = (name)=>{
+  return async (dispatch)=>{
+    let info = await axios(`http://localhost:3001/characters?name=${name}`)
+    dispatch({
+      type: GET_BY_NAME,
+      payload: info.data
+    })
+  }
+}
+
+export const addFavorite = (payload)=>{
+  return{
+    type: ADD_FAVORITE,
+    payload
+  }
+}
+
+export const deleteFavorite = (id)=>{
+  return{
+    type: DELETE_FAVORITE,
+    payload: id
   }
 }

@@ -56,10 +56,15 @@
 }
 
 .links .link .heart{
-  color: red;
+  color: white;
   position: absolute;
-  top: 59px;
-  left: 58.3%;
+  top: 61px;
+  left: 51%;
+  transition: 1s;
+}
+
+.links .link .heart:hover{
+  color: red;
 }
 
 .link:hover{

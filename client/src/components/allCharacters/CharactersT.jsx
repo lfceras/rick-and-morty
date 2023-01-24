@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCharacters } from "../../redux/actions/actions";
+import { getAllCharacters, getByName } from "../../redux/actions/actions";
 import CardCharacter from "../cardCharacter/CardCharacter";
 import NavBar from "../navBar/NavBar";
 import Paginado from "../paginado/Paginado";
@@ -8,6 +8,7 @@ import './characters.css'
 
 const CharactersT = () => {
   const characters = useSelector((state) => state.characters);
+  const Characters2 = useSelector((state) => state.characters2);
 
   const pageNumberLimit = 5;
   const [loading, setLoading] = useState(true);
@@ -45,7 +46,10 @@ const CharactersT = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     setLoading(true);
-    dispatch(getAllCharacters());
+    if(characters.length === Characters2.length){
+      dispatch(getAllCharacters());
+      dispatch(getByName())
+    }
     setLoading(false);
   }, [currentPage]);
 
