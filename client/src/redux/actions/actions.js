@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ADD_FAVORITE, CLEAR_DETAILS, DELETE_FAVORITE, GET_ALL_CHARACTERS, GET_BY_NAME, GET_DETAILS } from '../actionsType/actionsType'
+import { ADD_FAVORITE, CLEAR_DETAILS, DELETE_FAVORITE, GET_ALL_CHARACTERS, GET_BY_NAME, GET_DETAILS, ORDER_BY_NAME } from '../actionsType/actionsType'
 
 export const getAllCharacters = ()=>{
   return async (dispatch)=>{
@@ -36,6 +36,13 @@ export const getByName = (name)=>{
       type: GET_BY_NAME,
       payload: info.data
     })
+  }
+}
+
+export const orderByName = (payload)=>{
+  return{
+    type: ORDER_BY_NAME,
+    payload
   }
 }
 

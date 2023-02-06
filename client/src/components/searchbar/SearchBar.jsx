@@ -19,7 +19,9 @@ const SearchBar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!character) return alert("Debes ingresar un nombre");
+    if (!character.length){
+      return alert("Debes ingresar un nombre");
+    } 
     else if (/[`!@#$%^&*()_+\-=[\]{};':"\\|,.<>\d/?~]/.test(character)) {
       alert("El nombre del personaje ingresado no existe");
     } else {

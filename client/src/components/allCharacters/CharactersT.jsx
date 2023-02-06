@@ -45,13 +45,11 @@ const CharactersT = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    setLoading(true);
     if(characters.length === Characters2.length){
       dispatch(getAllCharacters());
       dispatch(getByName())
     }
-    setLoading(false);
-  }, [currentPage]);
+  }, [characters.length, Characters2.length, dispatch]);
 
   return (
     <div>

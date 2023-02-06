@@ -1,17 +1,21 @@
 .paginado{
+  display: flex;
+  width: 100%;
+  position: fixed;
+  padding: 30px; 
+  background: #1e2326;
+  height: 5vh;
+  margin-left: -1%;
 }
 
 .paginado ul{
   list-style: none;
   display: flex;
-  width: 100%;
   justify-content: center;
   align-items: center;
-  background: #1e2326;
   position: fixed;
-  width: 100%; 
-  padding: 30px;
-  left: 0;
+  margin-left: 35%;
+  margin-top: -0.5%;
 }
 
 .paginado li{

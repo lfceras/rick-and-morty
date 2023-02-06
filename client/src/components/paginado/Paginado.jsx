@@ -1,17 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import "./paginado.css";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { orderByName } from "../../redux/actions/actions";
 
 const Paginado = ({
   charactersPerPage,
   characters,
   paginado,
   currentPage,
+  setCurrentPage,
   maxPageLimit,
   minPageLimit,
   onPrevClick,
   onNextClick,
 }) => {
+
+  const [orden, setOrden] = useState("")
+  const dispatch = useDispatch()
+
+
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(characters / charactersPerPage); i++) {
@@ -56,17 +64,50 @@ const Paginado = ({
     pageDecremenEllipses = <li onClick={handlePrevClick}>&hellip;</li>;
   }
 
+  const handleSort = (e)=>{
+    dispatch(orderByName(e.target.value))
+    setOrden(`Ordenado ${e.target.value}}`)
+  }
+
   return (
     <div>
+    
       <div className="paginado">
-        <ul >
+      <div>
+        <div>
+        <input
+        type="submit"
+        value="ASC"
+        onClick={(e)=> handleSort(e)}
+        />
+        <input
+        type="submit"
+        value="DESC"
+        onClick={(e)=> handleSort(e)}
+        />
+        </div>
+
+        <div>
+          <select name="" id="">
+            <option value="all">Todos</option>
+            <option value="Alive">Vivo</option>
+            <option value="unknown">Desconocido</option>
+            <option value="Dead">Muerto</option>
+          </select>
+        </div>
+
+
+      </div>
+
+
+        <ul>
           <li>
             <button
               className="btn"
               onClick={handlePrevClick}
               disabled={currentPage === pageNumbers[0]}
             >
-             <FaChevronLeft/>
+              <FaChevronLeft />
             </button>
           </li>
           {pageDecremenEllipses}
@@ -74,11 +115,11 @@ const Paginado = ({
           {pageIncrementEllipses}
           <li>
             <button
-            className="btn"
+              className="btn"
               onClick={handleNextClick}
               disabled={currentPage === pageNumbers[pageNumbers.length - 1]}
             >
-              <FaChevronRight/>
+              <FaChevronRight />
             </button>
           </li>
         </ul>
