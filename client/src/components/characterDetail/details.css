@@ -1,0 +1,103 @@
+.back-n{
+  background-color: red;
+  width: 100%;
+  margin: 0 auto;
+  min-height:687px;
+  text-align: center;
+  background-image: url('../../assets/rick5.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.principal-character{
+  display: flex;
+  align-items: stretch;
+  justify-content: space-evenly;
+  margin-top: 8.5%;
+  width: 100%;
+  height: auto;
+}
+
+.principal2{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: transparent;
+  width: 400px;
+  height: auto;
+  margin-top: 20px;
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(0px);
+  border-radius: 10px;
+  border: 3px solid #fff;
+}
+
+.principal2:hover{
+  background-color: rgba(255, 255, 255, 0.4);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(15px);
+}
+
+
+.principal2 img{
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  margin-top: 10px;
+}
+
+.principal2 h1{
+  padding: 0;
+  margin: 0;
+  font-size: 35px;
+}
+
+.principal2 h2{
+  padding: 0;
+  margin: 0;
+  font-size: 30px;
+}
+
+.principal2 span{
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.principal2 label{
+  font-size: 25px;
+}
+
+.principal-character .episodes{
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 600px;
+  height: auto;
+  border: 3px solid #fff;
+  margin-top: 20px;
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(0px);
+  border-radius: 10px;
+}
+
+.principal-character .episodes h2{
+  color: red;
+  margin-top: -55%;
+}
+
+.principal-character .episodes:hover{
+  background-color: rgba(255, 255, 255, 0.4);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(15px);
+}
+
+.epids{
+  display: flex;
+  color: red;
+  align-items: center;
+  justify-content: center;
+}

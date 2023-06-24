@@ -1,0 +1,72 @@
+.principal {
+  background: #1e2326;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  padding: 35px;
+}
+
+.principal header {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding: 15px 20px;
+}
+
+.principal .enlaces {
+  display: flex;
+  align-items: center;
+  width: 30%;
+  justify-content: center;
+  margin-left: -25%;
+  gap: 25%;
+}
+
+.principal .enlaces button {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 25px;
+  transition: 0.5s;
+}
+
+.principal .enlaces button:hover {
+  color: lightblue;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  width: 70%;
+  justify-content: space-between;
+  margin-left: 10%;
+}
+
+.links .link {
+  font-size: 25px;
+  color: white;
+  text-decoration: none;
+  transition: 0.5s;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+.links .link .heart {
+  color: white;
+  position: absolute;
+  top: 61px;
+  left: 51%;
+  transition: 1s;
+}
+
+.links .link .heart:hover {
+  color: red;
+}
+
+.link:hover {
+  color: lightblue;
+}

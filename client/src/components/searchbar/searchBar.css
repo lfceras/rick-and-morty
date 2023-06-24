@@ -1,0 +1,31 @@
+.search{
+  display: flex;
+  align-items: center;
+}
+
+.search input{
+  width: 250px;
+  border-radius: 5px;
+  outline: none;
+  font-size: 19px;
+  margin: 8px 8px 8px 8px;
+  border: none;
+}
+
+.test{
+  background-color: white;
+  display: flex;
+  border-radius: 5px;
+  border: 2px solid black;
+  transition: 1s;
+}
+
+.test:hover {
+  background-color: lightblue;
+  color: black;
+  border-radius: 4px;
+}
+
+.icon{
+  cursor: pointer;
+}
