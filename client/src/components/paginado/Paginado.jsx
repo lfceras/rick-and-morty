@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./paginado.css";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { orderByName } from "../../redux/actions/actions";
+import { filterByStatus, orderByName } from "../../redux/actions/actions";
 
 const Paginado = ({
   charactersPerPage,
@@ -66,6 +66,10 @@ const Paginado = ({
     setOrden(`Ordenado ${e.target.value}}`);
   };
 
+  const handleFiterStatus = (e)=>{
+    dispatch(filterByStatus(e.target.value))
+  }
+
   return (
     <div>
       <div className="paginado">
@@ -100,7 +104,7 @@ const Paginado = ({
           </ul>
 
           <div>
-            <select name="" id="">
+            <select  onChange={handleFiterStatus}>
               <option value="all">Todos</option>
               <option value="Alive">Vivo</option>
               <option value="unknown">Desconocido</option>

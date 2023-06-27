@@ -3,13 +3,10 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { getAllCharacters } from "../../redux/actions/actions";
 import CreateCharacter from "../createCharacter/CreateCharacter";
-import Favorites from "../favorites/Favorites";
 import SearchBar from "../searchbar/SearchBar";
 import "./navBar.css";
-import { TfiReload } from "react-icons/tfi";
-import { AiOutlineHome } from "react-icons/ai";
 import { RiArrowGoBackLine } from "react-icons/ri";
-import { BsFillHeartFill } from "react-icons/bs";
+import image from '../../assets/rick1-removebg-preview.png'
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -22,23 +19,18 @@ const NavBar = () => {
     <div className="principal">
       <header>
         <div className="enlaces">
+        <Link to={'/home'} onClick={reload}>
+            <img src={image} alt="Not Found" />
+          </Link>
           <Link to={"/"}>
             <button>
               <RiArrowGoBackLine />
             </button>
           </Link>
-          {/* <Link to={"/home"}>
-            <button>
-              <AiOutlineHome />
-            </button>
-          </Link> */}
-          <button onClick={reload}>
-            <TfiReload />
-          </button>
         </div>
 
         <div className="links">
-          <Link to={"/home"} className="link" onClick={reload}>
+          <Link to={"/home"} className="link" >
             Home
           </Link>
           <Link to={"/create"} className="link">
@@ -46,7 +38,6 @@ const NavBar = () => {
           </Link>
           <Link to={"/favorites"} className="link">
             Favorites
-            {/* <BsFillHeartFill className="heart"/> */}
           </Link>
           <div>
             <SearchBar />

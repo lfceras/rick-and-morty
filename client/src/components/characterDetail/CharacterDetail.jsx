@@ -7,16 +7,14 @@ import "./details.css";
 
 const CharacterDetail = () => {
   const { id } = useParams();
-  // console.log(id);
 
   const detalles = useSelector((state) => state.detalles);
-  // console.log(detalles);
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getDetails(id));
     return ()=>{dispatch(cleanDetails())}
-  }, []);
+  }, [id]);
   return (
     <div>
       <NavBar />
@@ -38,7 +36,13 @@ const CharacterDetail = () => {
       <div className='episodes'>
         <h2>Episodes</h2>
         <div className="epids">
-          
+          {
+            detalles.episodes && detalles.episodes?.map((el, index) => (
+              <ul key={index}>
+                <li>{`${index + 1} - ${el.name ? el.name : el}`}</li>
+              </ul>
+            ))
+          }
       </div>
         </div>
       </div>

@@ -24,7 +24,7 @@ const allData = async () => {
         gender: el.gender,
         location: el.location?.name,
         image: el.image,
-        episode: el.episode,
+        episodes: el.episode,
       };
     });
     return info;

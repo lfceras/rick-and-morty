@@ -3,6 +3,7 @@ import {
   ADD_FAVORITE,
   CLEAR_DETAILS,
   DELETE_FAVORITE,
+  FILTER_BY_STATUS,
   GET_ALL_CHARACTERS,
   GET_BY_NAME,
   GET_DETAILS,
@@ -53,23 +54,6 @@ export const getDetails = (id) => {
   };
 };
 
-export const cleanDetails = () => {
-  return (dispatch) => {
-    dispatch({
-      type: CLEAR_DETAILS,
-    });
-  };
-};
-
-export const setCurrentPage = (page) => {
-  return (dispatch) => {
-    dispatch({
-      type: SET_CURRENT_PAGE,
-      payload: page,
-    });
-  };
-};
-
 export const getByName = (name) => {
   return async (dispatch) => {
     try {
@@ -84,12 +68,35 @@ export const getByName = (name) => {
   };
 };
 
+export const cleanDetails = () => {
+  return {
+      type: CLEAR_DETAILS,
+  };
+};
+
+export const setCurrentPage = (page) => {
+  return{
+    type: SET_CURRENT_PAGE,
+    payload: page,
+  }
+};
+
+
+
 export const orderByName = (payload) => {
   return {
     type: ORDER_BY_NAME,
     payload,
   };
 };
+
+export const filterByStatus = (payload)=>{
+  return {
+    type: FILTER_BY_STATUS,
+    payload
+  }
+}
+
 
 export const addFavorite = (payload) => {
   return {

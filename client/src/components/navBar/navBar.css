@@ -14,7 +14,7 @@
   align-items: center;
   justify-content: space-evenly;
   width: 100%;
-  height: 48px;
+  height: 55px;
 }
 
 .principal .enlaces {
@@ -22,6 +22,10 @@
   align-items: center;
   justify-content: center;
   gap: 30%;
+}
+
+.enlaces img{
+  width: 90px;
 }
 
 .links {

@@ -19,6 +19,8 @@ const Favorites = () => {
     <div>
       <NavBar/>
       <div className="principal-container">
+
+      <div className="card1">
       {favorites?.map((el) => (
         <div key={el.id}>
           <div className="card">
@@ -40,6 +42,8 @@ const Favorites = () => {
           </div>
           </div>
       ))}
+      </div>
+
       </div>
     </div>
   );
