@@ -1,8 +1,10 @@
 .cards{
   background-color: transparent;
   height: 280px;
-  width: 280px;
+  width: 220px;
   perspective: 1000px;
+  margin: 0;
+  padding: 0;
 }
 
 .flit-card-inner{
@@ -25,7 +27,6 @@
   height: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  border-radius: 16px;
 }
 
 .flit-card-front{
@@ -33,22 +34,22 @@
 }
 
 .flit-card-front img{
-  width: 290px;
-  border-radius: 35% 10%;
+  width: 210px;
   margin-bottom: 10px;
-  height: 350px;
+  height: 260px;
+  border-radius: 10px;
 }
 
 .flit-card-back{
   background-image: linear-gradient(315deg,#f1a3eb, #7d9793);
   color: black;
   transform: rotateY(180deg);
-  height: 350px;
-  border-radius: 10% 35%;
+  height: 260px;
+  border-radius: 10px;
 }
 
 .flit-card-back img{
-  width: 170px;
+  width: 130px;
   margin-top: 1rem;
   margin-bottom: 4rem;
   border-radius: 50%;
@@ -67,15 +68,15 @@
 }
 
 .cards label{
-  font-size: 30px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 400;
  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
  cursor: pointer;
 }
 
 .cards span{
-  font-size: 20px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 400;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
@@ -95,8 +96,8 @@
   top: 25px;
   left: 25px;
   cursor: pointer;
-  font-size: 35px;
-  transition: 1s;
+  font-size: 25px;
+  transition: 0.5s ease-in;
 }
 
 .cards .flit-card-back .hearts:hover{

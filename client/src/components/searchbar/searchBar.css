@@ -4,11 +4,11 @@
 }
 
 .search input{
-  width: 250px;
+  width: 180px;
   border-radius: 5px;
   outline: none;
-  font-size: 19px;
-  margin: 8px 8px 8px 8px;
+  font-size: 15px;
+  margin: 4px 4px 4px 4px;
   border: none;
 }
 
@@ -16,7 +16,7 @@
   background-color: white;
   display: flex;
   border-radius: 5px;
-  border: 2px solid black;
+  border: 1px black;
   transition: 1s;
 }
 

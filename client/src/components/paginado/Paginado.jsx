@@ -9,16 +9,13 @@ const Paginado = ({
   characters,
   paginado,
   currentPage,
-  setCurrentPage,
   maxPageLimit,
   minPageLimit,
   onPrevClick,
   onNextClick,
 }) => {
-
-  const [orden, setOrden] = useState("")
-  const dispatch = useDispatch()
-
+  const [orden, setOrden] = useState("");
+  const dispatch = useDispatch();
 
   const pageNumbers = [];
 
@@ -64,65 +61,53 @@ const Paginado = ({
     pageDecremenEllipses = <li onClick={handlePrevClick}>&hellip;</li>;
   }
 
-  const handleSort = (e)=>{
-    dispatch(orderByName(e.target.value))
-    setOrden(`Ordenado ${e.target.value}}`)
-  }
+  const handleSort = (e) => {
+    dispatch(orderByName(e.target.value));
+    setOrden(`Ordenado ${e.target.value}}`);
+  };
 
   return (
     <div>
-    
       <div className="paginado">
-      <div>
-        <div>
-        <input
-        type="submit"
-        value="ASC"
-        onClick={(e)=> handleSort(e)}
-        />
-        <input
-        type="submit"
-        value="DESC"
-        onClick={(e)=> handleSort(e)}
-        />
+        <div className="names">
+          <div>
+            <input type="submit" value="ASC" onClick={(e) => handleSort(e)} />
+            <input type="submit" value="DESC" onClick={(e) => handleSort(e)} />
+          </div>
+
+          <ul>
+            <li>
+              <button
+                className="btn"
+                onClick={handlePrevClick}
+                disabled={currentPage === pageNumbers[0]}
+              >
+                <FaChevronLeft />
+              </button>
+            </li>
+            {pageDecremenEllipses}
+            {pageCharacters}
+            {pageIncrementEllipses}
+            <li>
+              <button
+                className="btn"
+                onClick={handleNextClick}
+                disabled={currentPage === pageNumbers[pageNumbers.length - 1]}
+              >
+                <FaChevronRight />
+              </button>
+            </li>
+          </ul>
+
+          <div>
+            <select name="" id="">
+              <option value="all">Todos</option>
+              <option value="Alive">Vivo</option>
+              <option value="unknown">Desconocido</option>
+              <option value="Dead">Muerto</option>
+            </select>
+          </div>
         </div>
-
-        <div>
-          <select name="" id="">
-            <option value="all">Todos</option>
-            <option value="Alive">Vivo</option>
-            <option value="unknown">Desconocido</option>
-            <option value="Dead">Muerto</option>
-          </select>
-        </div>
-
-
-      </div>
-
-
-        <ul>
-          <li>
-            <button
-              className="btn"
-              onClick={handlePrevClick}
-              disabled={currentPage === pageNumbers[0]}
-            >
-              <FaChevronLeft />
-            </button>
-          </li>
-          {pageDecremenEllipses}
-          {pageCharacters}
-          {pageIncrementEllipses}
-          <li>
-            <button
-              className="btn"
-              onClick={handleNextClick}
-              disabled={currentPage === pageNumbers[pageNumbers.length - 1]}
-            >
-              <FaChevronRight />
-            </button>
-          </li>
-        </ul>
       </div>
     </div>
   );

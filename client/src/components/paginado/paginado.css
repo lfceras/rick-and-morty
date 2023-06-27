@@ -1,11 +1,43 @@
 .paginado{
-  display: flex;
-  width: 100%;
-  position: fixed;
-  padding: 30px; 
   background: #1e2326;
-  height: 5vh;
-  margin-left: -1%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 999;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.names{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 45px;
+}
+
+.names input{
+  width: 55px;
+  margin-right: 8px;
+  padding: 2px;
+  font-size: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.5s ease-in;
+}
+
+.names input:hover{
+  background-color: lightblue;
+}
+
+.names select{
+  width: 135px;
+  padding: 1.5px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  font-size: 12px;
+  cursor: pointer;
 }
 
 .paginado ul{
@@ -13,24 +45,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
-  margin-left: 35%;
-  margin-top: -0.5%;
 }
 
 .paginado li{
   margin-left: 10px;
-  font-size: 30px;
-  font-weight: bold;
+  font-size: 20px;
+  font-weight: 400;
   cursor: pointer;
+  border-radius: 5px;
+  transition: 0.5s ease-in;
+}
+
+.paginado li:hover{
+  background-color: lightblue;
 }
 
 .paginado button{
-  width: 100px;
-  padding: 8px;
-  border-radius: 20px;
+  width: 55px;
+  border-radius: 7px;
   cursor: pointer;
-  transition: 1s;
+  transition: 0.5s ease-in;
 }
 
 .paginado button:hover{

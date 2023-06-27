@@ -1,14 +1,25 @@
+body{
+  background-image: url('../../assets/rick5.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: auto;
+  left: 0;
+  width: 100%;
+  margin: 0;
+}
+
+
 .charcters{
   display: flex;
   flex-wrap: wrap;
-  margin-top: 8%;
+  margin-top: 5%;
+  margin-bottom: 4%;
   justify-content: center;
   align-items: center;
-  gap: 20px;
-  height: 73vh;
-  width: 100%;
-  background-image: url('../../assets/rick4.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
+  gap: 5px;
+  width: 98%;
 }
+
+
 

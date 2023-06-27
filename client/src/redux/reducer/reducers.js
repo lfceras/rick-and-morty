@@ -6,6 +6,7 @@ import {
   GET_BY_NAME,
   GET_DETAILS,
   ORDER_BY_NAME,
+  SET_CURRENT_PAGE,
 } from "../actionsType/actionsType";
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
   characters2: [],
   favorite: [],
   detalles: {},
+  currentPage: 1,
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -21,7 +23,9 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         characters: action.payload.sort((a, b) => a.name.localeCompare(b.name)),
-        characters2: action.payload.sort((a, b) => a.name.localeCompare(b.name)),
+        characters2: action.payload.sort((a, b) =>
+          a.name.localeCompare(b.name)
+        ),
       };
 
     case GET_DETAILS:
@@ -51,6 +55,12 @@ export default function rootReducer(state = initialState, action) {
         detalles: {},
       };
 
+    case SET_CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage: action.payload,
+      };
+
     case GET_BY_NAME:
       return {
         ...state,
@@ -58,39 +68,16 @@ export default function rootReducer(state = initialState, action) {
       };
 
     case ORDER_BY_NAME:
+      let sortedCharacters = [...state.characters];
       if (action.payload === "ASC") {
-        return {
-          ...state,
-          characters: [...state.characters].sort((a, b) => {
-            if (a.name > b.name) {
-              return 1;
-            }
-            if (b.name > a.name) {
-              return -1;
-            }
-            return 0;
-          }),
-        };
+        sortedCharacters.sort((a, b) => a.name.localeCompare(b.name));
+      } else if (action.payload === "DESC") {
+        sortedCharacters.sort((a, b) => b.name.localeCompare(a.name));
       }
-      if (action.payload === "DESC") {
-        return {
-          ...state,
-          characters: [...state.characters].sort((a, b) => {
-            if (a.name > b.name) {
-              return -1;
-            }
-            if (b.name > a.name) {
-              return 1;
-            }
-            return 0;
-          }),
-        };
-      } else {
-        return {
-          ...state,
-          characters: state.characters,
-        };
-      }
+      return {
+        ...state,
+        characters: sortedCharacters,
+      };
 
     default:
       return state;

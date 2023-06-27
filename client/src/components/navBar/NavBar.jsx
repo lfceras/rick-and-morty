@@ -24,30 +24,33 @@ const NavBar = () => {
         <div className="enlaces">
           <Link to={"/"}>
             <button>
-              <RiArrowGoBackLine/>
+              <RiArrowGoBackLine />
             </button>
           </Link>
-          <Link to={"/home"}>
+          {/* <Link to={"/home"}>
             <button>
               <AiOutlineHome />
             </button>
-          </Link>
-          <button onClick={() => reload()}>
+          </Link> */}
+          <button onClick={reload}>
             <TfiReload />
           </button>
         </div>
-        
+
         <div className="links">
+          <Link to={"/home"} className="link" onClick={reload}>
+            Home
+          </Link>
           <Link to={"/create"} className="link">
             <CreateCharacter />
           </Link>
           <Link to={"/favorites"} className="link">
             Favorites
-            <BsFillHeartFill className="heart"/>
+            {/* <BsFillHeartFill className="heart"/> */}
           </Link>
-        <div>
-          <SearchBar />
-        </div>
+          <div>
+            <SearchBar />
+          </div>
         </div>
       </header>
     </div>
