@@ -41,6 +41,11 @@
   cursor: pointer;
 }
 
+.create{
+  margin-right: 10px;
+  width: 55px;
+}
+
 .paginado ul{
   list-style: none;
   display: flex;

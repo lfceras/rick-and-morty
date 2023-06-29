@@ -3,10 +3,13 @@ import {
   CLEAR_DETAILS,
   DELETE_FAVORITE,
   FILTER_BY_STATUS,
+  FILTER_CREATED,
   GET_ALL_CHARACTERS,
   GET_BY_NAME,
   GET_DETAILS,
+  GET_EPISODES,
   ORDER_BY_NAME,
+  POST_CHARACTERS,
   SET_CURRENT_PAGE,
 } from "../actionsType/actionsType";
 
@@ -16,29 +19,29 @@ const initialState = {
   favorite: [],
   detalles: {},
   currentPage: 1,
+  episodes: [],
 };
 
 export default function rootReducer(state = initialState, action) {
   switch (action.type) {
-
     case GET_ALL_CHARACTERS:
-  const sortedCharacters1 = action.payload.sort((a, b) => a.name.localeCompare(b.name));
-  return {
-    ...state,
-    characters: sortedCharacters1,
-    characters2: sortedCharacters1,
-  };
-
+      const sortedCharacters1 = action.payload.sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
+      return {
+        ...state,
+        characters: sortedCharacters1,
+        characters2: sortedCharacters1,
+      };
 
     case ADD_FAVORITE:
-  const { id } = action.payload;
-  return {
-    ...state,
-    favorite: state.favorite.find((el) => el.id === id)
-      ? [...state.favorite]
-      : [...state.favorite, action.payload],
-  };
-
+      const { id } = action.payload;
+      return {
+        ...state,
+        favorite: state.favorite.find((el) => el.id === id)
+          ? [...state.favorite]
+          : [...state.favorite, action.payload],
+      };
 
     case ORDER_BY_NAME:
       let sortedCharacters = [...state.characters];
@@ -62,7 +65,31 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         characters: statusFiltered,
       };
-    
+
+    case FILTER_CREATED:
+      const personajes = state.characters2;
+      const createdFiltered =
+        action.payload === "created"
+          ? personajes.filter((el) => el.create)
+          : personajes.filter((el) => !el.create);
+      return {
+        ...state,
+        characters:
+          action.payload === "all" ? state.characters2 : createdFiltered,
+      };
+
+      case GET_EPISODES:
+        return{
+          ...state,
+          episodes: action.payload
+        }
+
+      case POST_CHARACTERS:
+        return{
+          ...state,
+          characters: [...state.characters, action.payload]
+        }
+
     case DELETE_FAVORITE: {
       return {
         ...state,
@@ -92,7 +119,7 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         characters: action.payload,
-        characters2: action.payload
+        characters2: action.payload,
       };
 
     default:

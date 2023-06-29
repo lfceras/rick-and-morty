@@ -1,0 +1,84 @@
+.container-principal{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: auto;
+}
+
+
+.contenedor-form{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 600px;
+  /* border: 2px solid black; */
+  margin-top: 5%;
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(0px);
+  margin-bottom: 5%;
+  border-radius: 10px;
+  transition: 0.5s ease-in;
+}
+
+.contenedor-form:hover{
+  background-color: rgba(255, 255, 255, 0.4);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(15px);
+}
+
+.contenedor-form form{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /* padding: 10px; */
+  margin-bottom: 5%;
+}
+
+.contenedor-form label{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 17px;
+  font-weight: normal;
+  width: 128px;
+}
+
+.contenedor-form h2{
+  font-weight: normal;
+  font-size: 22px;
+}
+
+.contenedor-form input{
+  width: 250px;
+  height: 25px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  background: transparent;
+  border-bottom: 1px solid white;
+  padding: 0;
+  margin: 0;
+}
+
+.contenedor-form input:focus {
+  border-bottom: 1px solid black; /* Estilo de la línea inferior cuando hay focus */
+}
+
+.status2{
+  position: relative;
+    left: 34%;
+}
+
+.checkBox-container{
+  display: flex;
+}
+
+.checkBox-container input{
+  height: 20px;
+  padding: 0;
+  margin: 0;
+}

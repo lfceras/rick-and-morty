@@ -4,9 +4,11 @@ import {
   CLEAR_DETAILS,
   DELETE_FAVORITE,
   FILTER_BY_STATUS,
+  FILTER_CREATED,
   GET_ALL_CHARACTERS,
   GET_BY_NAME,
   GET_DETAILS,
+  GET_EPISODES,
   ORDER_BY_NAME,
   SET_CURRENT_PAGE,
 } from "../actionsType/actionsType";
@@ -68,6 +70,26 @@ export const getByName = (name) => {
   };
 };
 
+export const getEpisodes = ()=>{
+  return async (dispatch)=>{
+    let episodes = await axios.get(`http://localhost:8000/episode`)
+    let response = episodes.data.data
+    // console.log(response);
+    dispatch({
+      type: GET_EPISODES,
+      payload: response
+    })
+  }
+}
+
+export const postCreate = (payload)=>{
+  return async (dispatch)=> {
+    let create = await axios.post(`http://localhost:8000/characters`,payload)
+    // console.log(create);
+    return create
+  }
+}
+
 export const cleanDetails = () => {
   return {
       type: CLEAR_DETAILS,
@@ -80,8 +102,6 @@ export const setCurrentPage = (page) => {
     payload: page,
   }
 };
-
-
 
 export const orderByName = (payload) => {
   return {
@@ -97,6 +117,12 @@ export const filterByStatus = (payload)=>{
   }
 }
 
+export const filterCreated = (payload)=>{
+  return{
+    type: FILTER_CREATED,
+    payload
+  }
+}
 
 export const addFavorite = (payload) => {
   return {

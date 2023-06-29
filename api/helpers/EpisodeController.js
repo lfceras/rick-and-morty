@@ -8,6 +8,7 @@ const allData = async () => {
       datos.push(`https://rickandmortyapi.com/api/episode?page=${i}`);
     }
     const datos2 = await Promise.all(datos.map((dato) => axios.get(dato)));
+    console.log(datos2);
     const episodes = datos2.flatMap((el) => el.data.results);
 
     const info = await Promise.all(

@@ -20,9 +20,9 @@ const allData = async () => {
         name: el.name,
         species: el.species,
         status: el.status,
-        origin: el.origin?.name,
+        origin: el.origin,
         gender: el.gender,
-        location: el.location?.name,
+        location: el.location,
         image: el.image,
         episodes: el.episode,
       };

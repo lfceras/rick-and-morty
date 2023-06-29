@@ -4,6 +4,7 @@ import { deleteFavorite } from "../../redux/actions/actions";
 import NavBar from "../navBar/NavBar";
 import './favorite.css'
 import { TiDeleteOutline } from "react-icons/ti";
+import { Link } from "react-router-dom";
 
 const Favorites = () => {
   const favorites = useSelector((state) => state.favorite);
@@ -33,8 +34,10 @@ const Favorites = () => {
               <button onClick={()=> deleteFav(el.id)}>
                 <TiDeleteOutline className="delete"/>
               </button>
+                <Link to={`/details/${el.id}`} className='link3'>
                 <img src={el.image} alt={el.image} />
                 <label className="letters1">{el.name}</label>
+                </Link>
                 <span className="letters1">{el.species}</span>
                 <span className="letters1">{el.origin}</span>
               </div>

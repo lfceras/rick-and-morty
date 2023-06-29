@@ -11,6 +11,7 @@ const CardCharacter = ({ id, image, name, species, origin }) => {
 
   const addFavorites = ()=>{
     dispatch(addFavorite({ id, image, name, species, origin}))
+    alert("Agregado a favoritos")
   }
 
   return (

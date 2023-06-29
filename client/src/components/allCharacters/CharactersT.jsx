@@ -60,11 +60,11 @@ const CharactersT = () => {
         {currentCharacters?.map((el) => (
           <CardCharacter
             key={el.id}
-            id={el.id}
-            image={el.image}
-            name={el.name}
-            species={el.species}
-            origin={el.origin}
+            id={el?.id}
+            image={el?.image}
+            name={el?.name}
+            species={el?.species}
+            origin={el?.origin}
           />
         ))}
       </div>

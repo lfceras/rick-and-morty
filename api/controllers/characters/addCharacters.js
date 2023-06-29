@@ -4,9 +4,25 @@ const { response } = require("../../utils");
 module.exports = async (req, res) => {
   const { name, species, status, gender, episodes, origin, location, image } =
     req.body;
-  if (!name || !species || !status || !gender) {
-    return response(res, 404, { msg: "Te falta llenar algunos campos" });
-  }
+ // Verificar si el personaje ya existe
+ const existingCharacter = await Character.findOne({
+  where: {
+    name: name,
+  },
+});
+
+if (existingCharacter) {
+  return res.status(400).json({ error: 'El personaje ya existe' });
+}
+
+// Validar los datos de entrada
+if (!name || name.length < 1 || name.length > 100) {
+  return res.status(400).json({ error: 'El nombre es inválido' });
+}
+
+if (!['Alive', 'unknown', 'Dead'].includes(status)) {
+  return res.status(400).json({ error: 'El estado es inválido' });
+}
   const createCharacter = await Character.create({
     name,
     species,
