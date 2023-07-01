@@ -20,6 +20,7 @@ const CharacterDetail = () => {
       <NavBar />
       <div className="back-n">
       <div className='principal-character'>
+        
       <div className="principal2">
         <img src={detalles.image} alt={detalles.image} />
         <h1>{detalles.name}</h1>
@@ -33,6 +34,8 @@ const CharacterDetail = () => {
           <label>Locacion</label>
           <span>{detalles.location}</span>
       </div>
+
+
       <div className='episodes'>
         <h2>Episodes</h2>
         <div className="epids">

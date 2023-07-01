@@ -26,6 +26,7 @@ export const getAllCharacters = () => {
     } else {
       let date = await axios(`http://localhost:8000/characters`);
       let response = date.data.data;
+      // console.log(response);
       cache.allCharacters = response; // Almacenamos los datos en caché
       dispatch({
         type: GET_ALL_CHARACTERS,

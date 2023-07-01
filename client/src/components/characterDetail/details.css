@@ -44,7 +44,7 @@
   height: 90px;
   border-radius: 50%;
   margin-bottom: 15px;
-  margin-top: -80px;
+  margin-top: 0px;
 }
 
 .principal2 h1{
@@ -76,7 +76,7 @@
   justify-content: center;
   width: 800px;
   height: auto;
-  border: 3px solid #fff;
+  /* border: 3px solid #fff; */
   margin-top: 20px;
   background-color: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(0px);
@@ -86,7 +86,9 @@
 
 .principal-character .episodes h2{
   position: relative;
-   margin-top: -8%; }
+   margin-top: 0;
+   margin-bottom: 0; 
+  }
 
 .principal-character .episodes:hover{
   background-color: rgba(255, 255, 255, 0.4);
@@ -98,6 +100,7 @@
   column-count: 3; /* Número de columnas */
   column-gap: 5px; /* Espacio entre columnas */
   text-align: justify;
+  width: auto;
 }
 
 .epids ul{

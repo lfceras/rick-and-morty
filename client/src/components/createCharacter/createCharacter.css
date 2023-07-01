@@ -12,12 +12,12 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  width: 600px;
+  width: 500px;
   /* border: 2px solid black; */
   margin-top: 5%;
   background-color: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(0px);
-  margin-bottom: 5%;
+  margin-bottom: 1%;
   border-radius: 10px;
   transition: 0.5s ease-in;
 }
@@ -59,26 +59,117 @@
   border: none;
   outline: none;
   background: transparent;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid lightblue;
   padding: 0;
   margin: 0;
+  font-size: 15px;
 }
 
 .contenedor-form input:focus {
-  border-bottom: 1px solid black; /* Estilo de la línea inferior cuando hay focus */
+  border-bottom: 1px solid rgb(113, 113, 231); /* Estilo de la línea inferior cuando hay focus */
+}
+
+.contenedor-form .selects{
+  width: 250px;
+  padding: 3px;
+  border-radius: 8px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  border: 1px solid lightblue;
+  outline: none;
+  /* background: transparent; */
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.contenedor-form .selects:hover{
+  border: 1px solid rgb(113, 113, 231);
+}
+
+.contenedor-form .btn4{
+  width: 44%;
+    padding: 5px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    border: 1px solid lightblue;
+}
+
+.contenedor-form .btn4:hover{
+  border: 1px solid rgb(113, 113, 231);
 }
 
 .status2{
   position: relative;
-    left: 34%;
+  left: 34%;
 }
 
 .checkBox-container{
   display: flex;
+  border: 2px solid lightblue;
+  border-radius: 8px;
+  /* padding-top: 2px; */
+}
+
+.checkBox-container:hover{
+  border: 2px solid rgb(113, 113, 231);
 }
 
 .checkBox-container input{
-  height: 20px;
-  padding: 0;
-  margin: 0;
+  height: 15px;
+  margin-top: 7px;
+  cursor: pointer;
+}
+
+.checkBox-container label{
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.episodes {
+  width: 250px;
+  padding: 3px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  margin-top: 11px;
+  border: 1px solid lightblue;
+  outline: none;
+  /* background: transparent; */
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.episodes:hover{
+  border: 1px solid rgb(113, 113, 231);
+}
+
+.episodes2{
+  width: 350px;
+    border: 1px solid transparent;
+    display: flex;
+    /* flex-wrap: wrap; */
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 15px;
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(1px);
+    border-radius: 10px;
+}
+
+.episodes2 .btn5{
+  position: relative;
+  left: -5%;
+  top: 24px;
+}
+
+.episodes2 .inter{
+  margin-top: -15px;
+}
+
+.episodes2 p{
+  margin-left: 20px;
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
