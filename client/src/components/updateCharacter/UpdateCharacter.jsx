@@ -1,16 +1,15 @@
-import "./createCharacter.css";
+import "../createCharacter/createCharacter.css";
 import {useSelector } from "react-redux";
 import { useCallback } from "react";
 import NavBar from "../navBar/NavBar";
-import {useSubmit} from '../../hooks/useSubmit'
+import {useUpdate} from '../../hooks/useUpdate'
 
-const CreateCharacter = () => {
-  const {handleSubmit, input, setInput, errors} = useSubmit()
+const UpdateCharacter = () => {
+  const {handleUpdate, input, setInput, errors, loading} = useUpdate()
 
   let episodes = useSelector((state) => state.episodes);
 
   const handleChange = useCallback((e) => {
-    // console.log(e.target);
     let val = e.target.value;
     if (!val.startsWith(" ")) {
       setInput((prevState) => ({
@@ -82,7 +81,7 @@ const CreateCharacter = () => {
       <div className="container-principal">
         <div className="contenedor-form">
           <h2>Crear Personaje</h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleUpdate}>
             <label>
               Name
               <input
@@ -92,11 +91,11 @@ const CreateCharacter = () => {
                 onChange={handleChange}
                 placeholder="Ingresa un nombre"
               />
-              {errors.name && (
+              {/* {errors.name && (
                 <p style={{ color: "red", fontSize: 13, width: "238px" }}>
                   {errors.name}
                 </p>
-              )}
+              )} */}
             </label>
 
             {/* ESPECIE */}
@@ -121,11 +120,11 @@ const CreateCharacter = () => {
                 <option value="Cronenberg">Cronenberg</option>
                 <option value="Disease">Disease</option>
               </select>
-              {errors.species && (
+              {/* {errors.species && (
                 <p style={{ color: "red", fontSize: 13, width: "238px" }}>
                   {errors.species}
                 </p>
-              )}
+              )} */}
             </label>
 
             {/* STATUS */}
@@ -163,11 +162,11 @@ const CreateCharacter = () => {
                   Muerto
                 </label>
               </div>
-              {errors.status && (
+              {/* {errors.status && (
                 <p style={{ color: "red", fontSize: 13, width: "238px" }}>
                   {errors.status}
                 </p>
-              )}
+              )} */}
             </div>
 
             {/* GENERO */}
@@ -205,11 +204,11 @@ const CreateCharacter = () => {
                   Desconocido
                 </label>
               </div>
-              {errors.gender && (
+              {/* {errors.gender && (
                 <p style={{ color: "red", fontSize: 13, width: "238px" }}>
                   {errors.gender}
                 </p>
-              )}
+              )} */}
             </label>
 
             {/* ORIGEN */}
@@ -276,11 +275,11 @@ const CreateCharacter = () => {
               </option>
               <option value="Larva Alien's Planet">Larva Alien's Planet</option>
             </select>
-            {errors.origin && (
+            {/* {errors.origin && (
               <p style={{ color: "red", fontSize: 13, width: "238px" }}>
                 {errors.origin}
               </p>
-            )}
+            )} */}
             {/* LOCATION */}
             <label>
               Residencia
@@ -299,11 +298,11 @@ const CreateCharacter = () => {
                 <option value="Rick's Memories">Rick's Memories</option>
                 <option value="Fantasy World">Fantasy World</option>
               </select>
-              {errors.location && (
+              {/* {errors.location && (
                 <p style={{ color: "red", fontSize: 13, width: "238px" }}>
                   {errors.location}
                 </p>
-              )}
+              )} */}
             </label>
 
             {/* IMAGEN */}
@@ -316,11 +315,11 @@ const CreateCharacter = () => {
                 onChange={handleChange}
                 placeholder="Carga una imagen"
               />
-              {errors.image && (
+              {/* {errors.image && (
                 <p style={{ color: "red", fontSize: 13, width: "238px" }}>
                   {errors.image}
                 </p>
-              )}
+              )} */}
             </label>
 
             <div>
@@ -332,14 +331,18 @@ const CreateCharacter = () => {
                   </option>
                 ))}
               </select>
-              {errors.episodes && (
+              {/* {errors.episodes && (
                 <p style={{ color: "red", fontSize: 13, width: "238px" }}>
                   {errors.episodes}
                 </p>
-              )}
+              )} */}
             </div>
             {/* <ul>{input.episodes.map((el) => el + " ")}</ul> */}
-            <button
+            {
+              loading 
+              ? (<p>Updating.....</p>)
+              : (
+                <button
               className="btn4"
               disabled={
                 input.name === "" ||
@@ -348,8 +351,11 @@ const CreateCharacter = () => {
                 input.location === ""
               }
             >
-              Crear Personaje
+              Actualizar Personaje
             </button>
+              )
+            }
+            
           </form>
 
           <div className="episodes2">
@@ -358,7 +364,7 @@ const CreateCharacter = () => {
                 <button onClick={() => handleDelete(el)} className="btn5">
                   X
                 </button>
-                <p>{el}</p>
+                <p>{el.name}</p>
               </div>
             ))}
           </div>
@@ -368,4 +374,4 @@ const CreateCharacter = () => {
   );
 };
 
-export default CreateCharacter;
+export default UpdateCharacter;

@@ -7,25 +7,33 @@ import SearchBar from "../searchbar/SearchBar";
 import "./navBar.css";
 import { RiArrowGoBackLine } from "react-icons/ri";
 import image from "../../assets/rick1-removebg-preview.png";
+import { useParams } from "react-router-dom";
 
 const NavBar = () => {
   const dispatch = useDispatch();
+  const { id } = useParams();
 
   const reload = () => {
     dispatch(getAllCharacters());
   };
 
   const currentPath = window.location.pathname;
+  // console.log(currentPath);
 
   const shouldShowSearchBar =
-    currentPath !== "/create" && currentPath !== "/favorites";
+    currentPath !== "/create" &&
+    currentPath !== "/favorites" &&
+    currentPath !== `/details/${id}`;
 
-  const shouldAplyStyles = currentPath === "/create" || currentPath === "/favorites"
+  const shouldAplyStyles =
+    currentPath === "/create" || currentPath === "/favorites";
 
   return (
     <div className={`principal${shouldAplyStyles ? "additional-styles" : ""}`}>
       <header>
-        <div className={`enlaces${shouldAplyStyles ? "additional-styles" : ""}`}>
+        <div
+          className={`enlaces${shouldAplyStyles ? "additional-styles" : ""}`}
+        >
           <Link to={"/home"} onClick={reload}>
             <img src={image} alt="Not Found" />
           </Link>
@@ -37,17 +45,27 @@ const NavBar = () => {
             </Link>
           )}
         </div>
-        <div className={`links${shouldAplyStyles ? "additional-styles" : "" }`}>
-          <Link to={"/home"} className={`link${currentPath === "/home" ? "active" : "" }`}>
+        <div className={`links${shouldAplyStyles ? "additional-styles" : ""}`}>
+          <Link
+            to={"/home"}
+            className={`link${currentPath === "/home" ? "active" : ""}`}
+          >
             Home
           </Link>
-          {currentPath !== "/create" && (
-            <Link to={"/create"} className={`link${currentPath === "/create" ? "active" : "" }`}>
+          {
+          currentPath !== "/create" && currentPath !== "/update/:id" && (
+            <Link
+              to={"/create"}
+              className={`link${currentPath === "/create" ? "active" : ""}`}
+            >
               Create Character
             </Link>
           )}
           {currentPath !== "/favorites" && (
-            <Link to={"/favorites"} className={`link${currentPath === "/favorites" ? "active" : "" }`}>
+            <Link
+              to={"/favorites"}
+              className={`link${currentPath === "/favorites" ? "active" : ""}`}
+            >
               Favorites
             </Link>
           )}

@@ -4,6 +4,9 @@ import LandingPage from "./components/landingPage/LandingPage"
 import Favorites from "./components/favorites/Favorites"
 import CreateCharacter from "./components/createCharacter/CreateCharacter"
 import CharacterDetail from "./components/characterDetail/CharacterDetail"
+import NavBar from "./components/navBar/NavBar"
+import UpdateCharacter from "./components/updateCharacter/UpdateCharacter"
+
 
 function App() {
   return (
@@ -13,7 +16,8 @@ function App() {
         <Route path="/home" element={ <CharactersT/>} />
         <Route path="/favorites" element={<Favorites/>}/>
         <Route path="/details/:id" element={<CharacterDetail/>}/>
-        <Route path="/create" element={<CreateCharacter/>}/>
+        <Route path="/create/" element={<CreateCharacter/>}/>
+        <Route path="/update/:id" element={<UpdateCharacter/>}/>
       </Routes>  
     </div>  
   )

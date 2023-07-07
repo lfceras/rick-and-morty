@@ -5,13 +5,18 @@ module.exports = async (req, res) => {
   const { name, species, status, gender, episodes, origin, location, image } =
     req.body;
   // Verificar si el personaje ya existe
-  const existingCharacter = await Character.findOne({
-    where: {
-      name: name,
-    },
-  });
+  const checkCharacterExists = async (name) => {
+    // Verificar si el personaje ya existe
+    const existingCharacter = await Character.findOne({
+      where: {
+        name: name,
+      },
+    });
+    return existingCharacter !== null;
+  };
 
-  if (existingCharacter) {
+  const characterExists = await checkCharacterExists(name);
+  if (characterExists) {
     return res.status(400).json({ error: "El personaje ya existe" });
   }
 

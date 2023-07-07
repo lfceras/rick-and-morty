@@ -10,6 +10,7 @@ import { useCallback } from "react";
 const CharactersT = () => {
   const dispatch = useDispatch();
   const characters = useSelector((state) => state.characters, shallowEqual);
+  // console.log(characters);
   const currentPage = useSelector(state => state.currentPage);
   // const Characters2 = useSelector((state) => state.characters2);
 
@@ -65,6 +66,7 @@ const CharactersT = () => {
             name={el?.name}
             species={el?.species}
             origin={el?.origin}
+            create= {el.create}
           />
         ))}
       </div>

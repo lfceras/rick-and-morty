@@ -1,6 +1,8 @@
 import {
   ADD_FAVORITE,
   CLEAR_DETAILS,
+  CREATE_ERROR,
+  CREATE_SUCCESS,
   DELETE_FAVORITE,
   FILTER_BY_STATUS,
   FILTER_CREATED,
@@ -11,6 +13,7 @@ import {
   ORDER_BY_NAME,
   POST_CHARACTERS,
   SET_CURRENT_PAGE,
+  UPDATE_CHARACTER,
 } from "../actionsType/actionsType";
 
 const initialState = {
@@ -20,6 +23,8 @@ const initialState = {
   detalles: {},
   currentPage: 1,
   episodes: [],
+  error: null,
+  createSuccess: false,
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -78,17 +83,46 @@ export default function rootReducer(state = initialState, action) {
           action.payload === "all" ? state.characters2 : createdFiltered,
       };
 
-      case GET_EPISODES:
-        return{
-          ...state,
-          episodes: action.payload
-        }
+    case GET_EPISODES:
+      return {
+        ...state,
+        episodes: action.payload,
+      };
 
-      case POST_CHARACTERS:
-        return{
-          ...state,
-          characters: [...state.characters, action.payload]
-        }
+    case POST_CHARACTERS:
+      return {
+        ...state,
+        characters: [...state.characters, action.payload],
+      };
+
+    case UPDATE_CHARACTER:
+      return {
+        ...state,
+        characters: state.characters.map((character) => {
+          if (character.id === action.payload.id) {
+            return {
+              ...character,
+              ...action.payload
+            }
+          }
+          return character;
+        }),
+      };
+
+    case CREATE_SUCCESS:
+      return {
+        ...state,
+        characters: [...state.characters, action.payload],
+        createSuccess: true,
+        error: null,
+      };
+
+    case CREATE_ERROR:
+      return {
+        ...state,
+        createSuccess: false,
+        error: action.payload,
+      };
 
     case DELETE_FAVORITE: {
       return {
