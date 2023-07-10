@@ -4,6 +4,7 @@ import {
   CLEAR_DETAILS,
   CREATE_ERROR,
   CREATE_SUCCESS,
+  DELETE_CHARACTER,
   DELETE_FAVORITE,
   FILTER_BY_STATUS,
   FILTER_CREATED,
@@ -69,7 +70,8 @@ export const getByName = (name) => {
         payload: info.data.data,
       });
     } catch (error) {
-      alert("Personaje no encontrado");
+      // console.error(error)
+      alert(error.response?.data?.data.msg);
     }
   };
 };
@@ -94,6 +96,7 @@ export const postCreate = (payload) => {
         payload
       );
       let response = create.data;
+      // console.log(response);
       if (response && response.data?.createCharacter) {
         dispatch({
           type: CREATE_SUCCESS,
@@ -119,29 +122,6 @@ export const postCreate = (payload) => {
   };
 };
 
-// export const updateCharacter = (id, updateData) => {
-//   return async (dispatch) => {
-//     try {
-//       let response = await axios.put(
-//         `http://localhost:8000/characters/${id}`,
-//         updateData
-//       );
-//       const updatedCharacter = response.data?.data;
-//       dispatch({
-//         type: UPDATE_CHARACTER,
-//         payload: {
-//           id,
-//           ...updatedCharacter,
-//         },
-//       });
-//       return updatedCharacter;
-//     } catch (error) {
-//       console.error(error);
-//       throw new Error("Error updating character");
-//     }
-//   };
-// };
-
 export const updateCharacter = (id, updateData) => {
   return async (dispatch) => {
     try {
@@ -162,6 +142,25 @@ export const updateCharacter = (id, updateData) => {
     }
   };
 };
+
+export const deleteCharacter = (id)=>{
+  return async (dispatch)=>{
+    try {
+      const confirmed = window.confirm("¿Estás seguro de que deseas eliminar este personaje?")
+      if(!confirmed){
+        return
+      }
+      let {data} = await axios.delete(`http://localhost:8000/characters/${id}`)
+      dispatch({
+        type: DELETE_CHARACTER,
+        payload: id
+      })
+    } catch (error) {
+      console.error(error)
+      throw new Error("Error al eliminar el personaje")
+    }
+  }
+}
 
 export const cleanDetails = () => {
   return {

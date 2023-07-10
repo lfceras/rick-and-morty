@@ -1,76 +1,16 @@
-import { useEffect, useState } from "react";
-import { useDispatch} from "react-redux";
-import { postCreate, getEpisodes} from "../../src/redux/actions/actions";
-import { useCallback } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { postCreate, getEpisodes } from "../../src/redux/actions/actions";
+import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 export function useSubmit() {
-  // let navigate = useNavigate();
+  let navigate = useNavigate();
   let dispatch = useDispatch();
 
-  const [input, setInput] = useState({
-    name: "",
-    species: "",
-    status: "",
-    gender: "",
-    origin: "",
-    location: "",
-    image: "",
-    episodes: [],
-  });
-  const [errors, setErrors] = useState({});
-
-  const validate = useCallback(() => {
-    let errors = {};
-    if (!input.name) {
-      errors.name = "Ingresa un nombre";
-    } else if (input.name.length < 3) {
-      errors.name = "Nombre muy corto";
-    }
-
-    if (!input.species) {
-      errors.species = "Selecciona una especie";
-    }
-
-    if (!input.status) {
-      errors.status = "Selecciona un estatus";
-    }
-
-    if (!input.gender) {
-      errors.gender = "Selecciona un genero";
-    }
-
-    if (!input.origin) {
-      errors.origin = "Selecciona un origen";
-    }
-
-    if (!input.location) {
-      errors.location = "Selecciona una residencia";
-    }
-
-    if (!input.image) {
-      errors.image = "Selecciona una imagen";
-    }
-
-    if (!input.episodes) {
-      errors.episodes = "Selecciona almenos un episodio";
-    }
-
-    setErrors(errors);
-  }, [input]);
-
-  useEffect(() => {
-    validate();
-  }, [validate]);
-
-  useEffect(() => {
-    dispatch(getEpisodes());
-  }, [dispatch]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(postCreate(input));
-    setInput({
+  const formik = useFormik({
+    initialValues: {
       name: "",
       species: "",
       status: "",
@@ -79,13 +19,32 @@ export function useSubmit() {
       location: "",
       image: "",
       episodes: [],
-    });
-  };
+    },
+    onSubmit: async (values, { resetForm }) => {
+      await dispatch(postCreate(values));
+      resetForm({ values: "" });
+      navigate("/home");
+    },
+    validationSchema: Yup.object({
+      name: Yup.string()
+        .min(3, "Nombre demasiaod corto")
+        .max(20, "Te excediste en el numero de caracteres")
+        .required("Este campo es obligatorio"),
+      species: Yup.string().required("Debes seleccionar una especie"),
+      status: Yup.string().required("Debes seleccionar un status"),
+      gender: Yup.string().required("Debes seleccionar un genero"),
+      origin: Yup.string().required("Debes seleccionar un planeta de origen"),
+      location: Yup.string().required("Debes seleccionar una locacion"),
+      image: Yup.string().required("Selecciona una imagen"),
+      episodes: Yup.array().required("Selecciona al menos un episodio"),
+    }),
+  });
+
+  useEffect(() => {
+    dispatch(getEpisodes());
+  }, [dispatch]);
 
   return {
-    input,
-    setInput,
-    handleSubmit,
-    errors
+    formik,
   };
 }

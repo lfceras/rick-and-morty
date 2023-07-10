@@ -1,80 +1,133 @@
 import "./createCharacter.css";
-import {useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useCallback } from "react";
 import NavBar from "../navBar/NavBar";
-import {useSubmit} from '../../hooks/useSubmit'
+import { useSubmit } from "../../hooks/useSubmit";
 
 const CreateCharacter = () => {
-  const {handleSubmit, input, setInput, errors} = useSubmit()
+  const { formik } = useSubmit();
 
   let episodes = useSelector((state) => state.episodes);
 
-  const handleChange = useCallback((e) => {
-    // console.log(e.target);
-    let val = e.target.value;
-    if (!val.startsWith(" ")) {
-      setInput((prevState) => ({
-        ...prevState,
-        [e.target.name]: val,
-      }));
-    }
-  }, []);
+  // const handleChange = useCallback((e) => {
+  //   // console.log(e.target);
+  //   let val = e.target.value;
+  //   if (!val.startsWith(" ")) {
+  //     setInput((prevState) => ({
+  //       ...prevState,
+  //       [e.target.name]: val,
+  //     }));
+  //   }
+  // }, []);
 
-  const handleCheked = useCallback((e) => {
-    if (e.target.checked) {
-      setInput((prevState) => ({
-        ...prevState,
-        status: e.target.value,
-      }));
-    }
-  }, []);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    formik.setFieldValue(name, value);
+  };
 
-  const handleChekedGender = useCallback((e) => {
-    if (e.target.checked) {
-      setInput((prevState) => ({
-        ...prevState,
-        gender: e.target.value,
-      }));
-    }
-  }, []);
-
-  const handleSelected = useCallback(
-    (e) => {
-      setInput((prevState) => ({
-        ...prevState,
-        episodes: [...input.episodes, e.target.value],
-      }));
-    },
-    [input.episodes]
-  );
+  // const handleSelectedSpecie = useCallback((e) => {
+  //   setInput((prevState) => ({
+  //     ...prevState,
+  //     species: e.target.value !== "" ? e.target.value : "",
+  //   }));
+  // }, []);
 
   const handleSelectedSpecie = useCallback((e) => {
-    setInput((prevState) => ({
-      ...prevState,
-      species: e.target.value !== "" ? e.target.value : "",
-    }));
+    formik.setFieldValue(
+      "species",
+      e.target.value !== "" ? e.target.value : ""
+    );
   }, []);
+
+  // const handleChekedStatus = useCallback((e) => {
+  //   if (e.target.checked) {
+  //     setInput((prevState) => ({
+  //       ...prevState,
+  //       status: e.target.value,
+  //     }));
+  //   }
+  // }, []);
+
+  const handleChekedStatus = useCallback((e) => {
+    const { value, checked } = e.target;
+    formik.setFieldValue("status", checked ? value : "");
+  }, []);
+
+  // const handleChekedGender = useCallback((e) => {
+  //   if (e.target.checked) {
+  //     setInput((prevState) => ({
+  //       ...prevState,
+  //       gender: e.target.value,
+  //     }));
+  //   }
+  // }, []);
+
+  const handleChekedGender = useCallback((e) => {
+    const { value, checked } = e.target;
+    formik.setFieldValue("gender", checked ? value : "");
+  }, []);
+
+  // const handleSelectedOrigin = useCallback((e) => {
+  //   setInput((prevState) => ({
+  //     ...prevState,
+  //     origin: e.target.value !== "" ? e.target.value : "",
+  //   }));
+  // }, []);
 
   const handleSelectedOrigin = useCallback((e) => {
-    setInput((prevState) => ({
-      ...prevState,
-      origin: e.target.value !== "" ? e.target.value : "",
-    }));
+    formik.setFieldValue("origin", e.target.value !== "" ? e.target.value : "");
   }, []);
+
+  // const handleSelectedLocation = useCallback((e) => {
+  //   setInput((prevState) => ({
+  //     ...prevState,
+  //     location: e.target.value !== "" ? e.target.value : "",
+  //   }));
+  // }, []);
 
   const handleSelectedLocation = useCallback((e) => {
-    setInput((prevState) => ({
-      ...prevState,
-      location: e.target.value !== "" ? e.target.value : "",
-    }));
+    formik.setFieldValue(
+      "location",
+      e.target.value !== "" ? e.target.value : ""
+    );
   }, []);
 
-  const handleDelete = useCallback((el) => {
-    setInput((prevState) => ({
-      ...prevState,
-      episodes: prevState.episodes.filter((occ) => occ !== el),
-    }));
-  }, []);
+  // const handleSelected = useCallback(
+  //   (e) => {
+  //     setInput((prevState) => ({
+  //       ...prevState,
+  //       episodes: [...formik.values.episodes, e.target.value],
+  //     }));
+  //   },
+  //   [formik.values.episodes]
+  // );
+
+  const handleSelectedEpisodes = useCallback(
+    (e) => {
+      formik.setFieldValue("episodes", [
+        ...formik.values.episodes,
+        e.target.value,
+      ]);
+    },
+    [formik.values.episodes]
+  );
+
+  // const handleDelete = useCallback((el) => {
+  //   setInput((prevState) => ({
+  //     ...prevState,
+  //     episodes: prevState.episodes.filter((occ) => occ !== el),
+  //   }));
+  // }, []);
+
+  const handleDelete = useCallback(
+    (episode) => {
+      const updatedEpisodes = formik.values.episodes.filter(
+        (e) => e !== episode
+      );
+      formik.setFieldValue("episodes", updatedEpisodes);
+    },
+    [formik.values.episodes]
+  );
 
   return (
     <div>
@@ -82,29 +135,33 @@ const CreateCharacter = () => {
       <div className="container-principal">
         <div className="contenedor-form">
           <h2>Crear Personaje</h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={formik.handleSubmit}>
+            {/* NOMBRE*/}
             <label>
               Name
               <input
                 type="text"
                 name="name"
-                value={input.name}
-                onChange={handleChange}
+                value={formik.values.name}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 placeholder="Ingresa un nombre"
               />
-              {errors.name && (
-                <p style={{ color: "red", fontSize: 13, width: "238px" }}>
-                  {errors.name}
-                </p>
-              )}
+              {formik.touched.name && formik.errors.name ? (
+                <div style={{ color: "red", fontSize: 13, width: "238px" }}>
+                  {formik.errors.name}
+                </div>
+              ) : null}
             </label>
 
             {/* ESPECIE */}
             <label>
               Especie
               <select
+                name="species"
+                value={formik.values.species}
                 onChange={handleSelectedSpecie}
-                value={input.species}
+                onBlur={formik.handleBlur}
                 className="selects"
               >
                 <option value="">Seleccionar especie</option>
@@ -121,11 +178,11 @@ const CreateCharacter = () => {
                 <option value="Cronenberg">Cronenberg</option>
                 <option value="Disease">Disease</option>
               </select>
-              {errors.species && (
-                <p style={{ color: "red", fontSize: 13, width: "238px" }}>
-                  {errors.species}
-                </p>
-              )}
+              {formik.touched.species && formik.errors.species ? (
+                <div style={{ color: "red", fontSize: 13, width: "238px" }}>
+                  {formik.errors.species}
+                </div>
+              ) : null}
             </label>
 
             {/* STATUS */}
@@ -138,7 +195,9 @@ const CreateCharacter = () => {
                     type="checkbox"
                     name="Alive"
                     value="Alive"
-                    onChange={handleCheked}
+                    checked={formik.values.status === "Alive"}
+                    onChange={handleChekedStatus}
+                    // onBlur={formik.handleBlur}
                   />
                   Vivo
                 </label>
@@ -148,7 +207,9 @@ const CreateCharacter = () => {
                     id="checkboxUnknown"
                     name="unknown"
                     value="unknown"
-                    onChange={handleCheked}
+                    checked={formik.values.status === "unknown"}
+                    onChange={handleChekedStatus}
+                    // onBlur={formik.handleBlur}
                   />
                   Desconocido
                 </label>
@@ -158,16 +219,16 @@ const CreateCharacter = () => {
                     id="checkboxDead"
                     name="Dead"
                     value="Dead"
-                    onChange={handleCheked}
+                    checked={formik.values.status === "Dead"}
+                    onChange={handleChekedStatus}
+                    // onBlur={formik.handleBlur}
                   />
                   Muerto
                 </label>
               </div>
-              {errors.status && (
-                <p style={{ color: "red", fontSize: 13, width: "238px" }}>
-                  {errors.status}
-                </p>
-              )}
+              {/* {formik.touched.status && formik.errors.status ? (
+                <div style={{ color: "red", fontSize: 13, width: "238px" }}>{formik.errors.status}</div>
+              ) : null} */}
             </div>
 
             {/* GENERO */}
@@ -180,6 +241,7 @@ const CreateCharacter = () => {
                     name="Male"
                     value="Male"
                     id="checkboxMale"
+                    checked={formik.values.gender === "Male"}
                     onChange={handleChekedGender}
                   />
                   Hombre
@@ -190,6 +252,7 @@ const CreateCharacter = () => {
                     name="Female"
                     value="Female"
                     id="checkboxFemale"
+                    checked={formik.values.gender === "Female"}
                     onChange={handleChekedGender}
                   />
                   Mujer
@@ -200,24 +263,27 @@ const CreateCharacter = () => {
                     name="unknown"
                     value="unknown"
                     id="checkboxunknown"
+                    checked={formik.values.gender === "unknown"}
                     onChange={handleChekedGender}
                   />
                   Desconocido
                 </label>
               </div>
-              {errors.gender && (
+              {/* {errors.gender && (
                 <p style={{ color: "red", fontSize: 13, width: "238px" }}>
                   {errors.gender}
                 </p>
-              )}
+              )} */}
             </label>
 
             {/* ORIGEN */}
             <label>Origen</label>
             <select
               onChange={handleSelectedOrigin}
-              value={input.origin}
+              name="origin"
+              value={formik.values.origin}
               className="selects"
+              onBlur={formik.handleBlur}
             >
               <option value="">Seleccionar origen</option>
               <option value="Earth (C-137)">Earth (C-137)</option>
@@ -276,18 +342,20 @@ const CreateCharacter = () => {
               </option>
               <option value="Larva Alien's Planet">Larva Alien's Planet</option>
             </select>
-            {errors.origin && (
-              <p style={{ color: "red", fontSize: 13, width: "238px" }}>
-                {errors.origin}
-              </p>
-            )}
+            {formik.touched.origin && formik.errors.origin ? (
+              <div style={{ color: "red", fontSize: 13, width: "238px" }}>
+                {formik.errors.origin}
+              </div>
+            ) : null}
             {/* LOCATION */}
             <label>
               Residencia
               <select
                 onChange={handleSelectedLocation}
-                value={input.location}
+                name="location"
+                value={formik.values.location}
                 className="selects"
+                onBlur={formik.handleBlur}
               >
                 <option value="">Seleccionar locacion</option>
                 <option value="Citadel of Ricks">Citadel of Ricks</option>
@@ -299,11 +367,11 @@ const CreateCharacter = () => {
                 <option value="Rick's Memories">Rick's Memories</option>
                 <option value="Fantasy World">Fantasy World</option>
               </select>
-              {errors.location && (
-                <p style={{ color: "red", fontSize: 13, width: "238px" }}>
-                  {errors.location}
-                </p>
-              )}
+              {formik.touched.location && formik.errors.location ? (
+                <div style={{ color: "red", fontSize: 13, width: "238px" }}>
+                  {formik.errors.location}
+                </div>
+              ) : null}
             </label>
 
             {/* IMAGEN */}
@@ -312,19 +380,25 @@ const CreateCharacter = () => {
               <input
                 type="text"
                 name="image"
-                value={input.image}
+                value={formik.values.image}
                 onChange={handleChange}
                 placeholder="Carga una imagen"
+                onBlur={formik.handleBlur}
               />
-              {errors.image && (
-                <p style={{ color: "red", fontSize: 13, width: "238px" }}>
-                  {errors.image}
-                </p>
-              )}
+              {formik.touched.image && formik.errors.image ? (
+                <div style={{ color: "red", fontSize: 13, width: "238px" }}>
+                  {formik.errors.image}
+                </div>
+              ) : null}
             </label>
 
             <div>
-              <select onChange={handleSelected} className="episodes">
+              <select
+                name="episodes"
+                onChange={(e) => handleSelectedEpisodes(e)}
+                className="episodes"
+                onBlur={formik.handleBlur}
+              >
                 <option value="">Seleccionar episodio</option>
                 {episodes?.map((el) => (
                   <option key={el.id} value={el.name}>
@@ -332,20 +406,21 @@ const CreateCharacter = () => {
                   </option>
                 ))}
               </select>
-              {errors.episodes && (
-                <p style={{ color: "red", fontSize: 13, width: "238px" }}>
-                  {errors.episodes}
-                </p>
-              )}
+              {formik.touched.episodes && formik.errors.episodes ? (
+                <div style={{ color: "red", fontSize: 13, width: "238px" }}>
+                  {formik.errors.episodes}
+                </div>
+              ) : null}
             </div>
             {/* <ul>{input.episodes.map((el) => el + " ")}</ul> */}
             <button
               className="btn4"
+              type="submit"
               disabled={
-                input.name === "" ||
-                input.species === "" ||
-                input.origin === "" ||
-                input.location === ""
+                formik.values.name === "" ||
+                formik.values.species === "" ||
+                formik.values.origin === "" ||
+                formik.values.location === ""
               }
             >
               Crear Personaje
@@ -353,7 +428,7 @@ const CreateCharacter = () => {
           </form>
 
           <div className="episodes2">
-            {input.episodes?.map((el, index) => (
+            {formik.values.episodes?.map((el, index) => (
               <div key={index} className="inter">
                 <button onClick={() => handleDelete(el)} className="btn5">
                   X

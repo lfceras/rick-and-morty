@@ -1,11 +1,12 @@
+import './App.css'
 import CharactersT from "./components/allCharacters/CharactersT"
 import {Routes, Route} from 'react-router-dom'
 import LandingPage from "./components/landingPage/LandingPage"
 import Favorites from "./components/favorites/Favorites"
 import CreateCharacter from "./components/createCharacter/CreateCharacter"
 import CharacterDetail from "./components/characterDetail/CharacterDetail"
-import NavBar from "./components/navBar/NavBar"
 import UpdateCharacter from "./components/updateCharacter/UpdateCharacter"
+
 
 
 function App() {

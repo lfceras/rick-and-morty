@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 
 const Favorites = () => {
   const favorites = useSelector((state) => state.favorite);
-  // console.log(favorites);
 
   const dispatch = useDispatch()
 

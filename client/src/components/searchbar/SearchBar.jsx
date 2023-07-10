@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./searchBar.css";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { IconContext } from "react-icons/lib";
 import { useDispatch } from "react-redux";
-import { getByName } from "../../redux/actions/actions";
+import { getAllCharacters, getByName } from "../../redux/actions/actions";
 import { useCallback } from "react";
+import debounce from 'lodash.debounce'
 
 const SearchBar = () => {
   const [character, setCharacter] = useState("");
-
+  const [lastSearchedCharacter, setLastSearchedCharacter] = useState("");
   const dispatch = useDispatch()
 
   const handleChange = useCallback((e) => {
@@ -18,17 +19,35 @@ const SearchBar = () => {
     }
   },[])
 
+  const debounceSearch = useRef(
+    debounce((value) => {
+      if (value.length) {
+        dispatch(getByName(value));
+        setLastSearchedCharacter(value);
+      } else if (value.length === 0) {
+        dispatch(getAllCharacters());
+        setLastSearchedCharacter("");
+      }
+    }, 500)
+  ).current;
+  
+  useEffect(() => {
+    debounceSearch(character);
+  }, [character, debounceSearch, dispatch, lastSearchedCharacter]);
+  
   const handleSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      if (!character.length){
-        return alert("Debes ingresar un nombre");
-      } else{
-        dispatch(getByName(character))
-        setCharacter("")
+      if (!character.length) {
+        dispatch(getAllCharacters());
+      } else {
+        dispatch(getByName(character));
+        setCharacter("");
       }
-    },[character, dispatch]) 
-
+    },
+    [character, dispatch]
+  );
+  
   return (
     <div>
       <form onSubmit={handleSubmit}>

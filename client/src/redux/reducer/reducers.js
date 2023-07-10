@@ -3,6 +3,7 @@ import {
   CLEAR_DETAILS,
   CREATE_ERROR,
   CREATE_SUCCESS,
+  DELETE_CHARACTER,
   DELETE_FAVORITE,
   FILTER_BY_STATUS,
   FILTER_CREATED,
@@ -25,6 +26,7 @@ const initialState = {
   episodes: [],
   error: null,
   createSuccess: false,
+  charactersExist: false
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -32,11 +34,12 @@ export default function rootReducer(state = initialState, action) {
     case GET_ALL_CHARACTERS:
       const sortedCharacters1 = action.payload.sort((a, b) =>
         a.name.localeCompare(b.name)
-      );
+      ); 
+      // ---> con este sorted characters no me permitia hacer el debounce de manera adecuada por eso lo comente
       return {
         ...state,
-        characters: sortedCharacters1,
-        characters2: sortedCharacters1,
+        characters: action.payload,
+        characters2: action.payload,
       };
 
     case ADD_FAVORITE:
@@ -81,6 +84,7 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         characters:
           action.payload === "all" ? state.characters2 : createdFiltered,
+          charactersExist: createdFiltered.length > 0,
       };
 
     case GET_EPISODES:
@@ -108,6 +112,13 @@ export default function rootReducer(state = initialState, action) {
           return character;
         }),
       };
+      
+
+    case DELETE_CHARACTER:
+    return{
+      ...state,
+      characters: state.characters.filter(character => character.id !== action.payload)
+    }
 
     case CREATE_SUCCESS:
       return {

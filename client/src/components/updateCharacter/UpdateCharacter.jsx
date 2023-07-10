@@ -91,11 +91,6 @@ const UpdateCharacter = () => {
                 onChange={handleChange}
                 placeholder="Ingresa un nombre"
               />
-              {/* {errors.name && (
-                <p style={{ color: "red", fontSize: 13, width: "238px" }}>
-                  {errors.name}
-                </p>
-              )} */}
             </label>
 
             {/* ESPECIE */}
@@ -120,11 +115,6 @@ const UpdateCharacter = () => {
                 <option value="Cronenberg">Cronenberg</option>
                 <option value="Disease">Disease</option>
               </select>
-              {/* {errors.species && (
-                <p style={{ color: "red", fontSize: 13, width: "238px" }}>
-                  {errors.species}
-                </p>
-              )} */}
             </label>
 
             {/* STATUS */}
@@ -162,11 +152,6 @@ const UpdateCharacter = () => {
                   Muerto
                 </label>
               </div>
-              {/* {errors.status && (
-                <p style={{ color: "red", fontSize: 13, width: "238px" }}>
-                  {errors.status}
-                </p>
-              )} */}
             </div>
 
             {/* GENERO */}
@@ -204,11 +189,6 @@ const UpdateCharacter = () => {
                   Desconocido
                 </label>
               </div>
-              {/* {errors.gender && (
-                <p style={{ color: "red", fontSize: 13, width: "238px" }}>
-                  {errors.gender}
-                </p>
-              )} */}
             </label>
 
             {/* ORIGEN */}
@@ -275,11 +255,6 @@ const UpdateCharacter = () => {
               </option>
               <option value="Larva Alien's Planet">Larva Alien's Planet</option>
             </select>
-            {/* {errors.origin && (
-              <p style={{ color: "red", fontSize: 13, width: "238px" }}>
-                {errors.origin}
-              </p>
-            )} */}
             {/* LOCATION */}
             <label>
               Residencia
@@ -298,11 +273,6 @@ const UpdateCharacter = () => {
                 <option value="Rick's Memories">Rick's Memories</option>
                 <option value="Fantasy World">Fantasy World</option>
               </select>
-              {/* {errors.location && (
-                <p style={{ color: "red", fontSize: 13, width: "238px" }}>
-                  {errors.location}
-                </p>
-              )} */}
             </label>
 
             {/* IMAGEN */}
@@ -315,11 +285,6 @@ const UpdateCharacter = () => {
                 onChange={handleChange}
                 placeholder="Carga una imagen"
               />
-              {/* {errors.image && (
-                <p style={{ color: "red", fontSize: 13, width: "238px" }}>
-                  {errors.image}
-                </p>
-              )} */}
             </label>
 
             <div>
@@ -331,13 +296,7 @@ const UpdateCharacter = () => {
                   </option>
                 ))}
               </select>
-              {/* {errors.episodes && (
-                <p style={{ color: "red", fontSize: 13, width: "238px" }}>
-                  {errors.episodes}
-                </p>
-              )} */}
             </div>
-            {/* <ul>{input.episodes.map((el) => el + " ")}</ul> */}
             {
               loading 
               ? (<p>Updating.....</p>)

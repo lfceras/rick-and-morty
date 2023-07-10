@@ -18,12 +18,12 @@ const NavBar = () => {
   };
 
   const currentPath = window.location.pathname;
-  // console.log(currentPath);
 
   const shouldShowSearchBar =
     currentPath !== "/create" &&
     currentPath !== "/favorites" &&
-    currentPath !== `/details/${id}`;
+    currentPath !== `/details/${id}` &&
+    currentPath !== `/update/${id}`;
 
   const shouldAplyStyles =
     currentPath === "/create" || currentPath === "/favorites";
@@ -52,8 +52,7 @@ const NavBar = () => {
           >
             Home
           </Link>
-          {
-          currentPath !== "/create" && currentPath !== "/update/:id" && (
+          {currentPath !== "/create" && currentPath !== "/update/:id" && (
             <Link
               to={"/create"}
               className={`link${currentPath === "/create" ? "active" : ""}`}

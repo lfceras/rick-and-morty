@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./paginado.css";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   filterByStatus,
   filterCreated,
@@ -20,6 +20,10 @@ const Paginado = ({
 }) => {
   const [orden, setOrden] = useState("");
   const dispatch = useDispatch();
+
+  let charactersExist = useSelector(state => state.charactersExist)
+
+  // console.log(charactersExist);
 
   const pageNumbers = [];
 
@@ -97,9 +101,9 @@ const Paginado = ({
                 <FaChevronLeft />
               </button>
             </li>
-            {pageDecremenEllipses}
+            {/* {pageDecremenEllipses} */}
             {pageCharacters}
-            {pageIncrementEllipses}
+            {/* {pageIncrementEllipses} */}
             <li>
               <button
                 className="btn"
@@ -112,11 +116,22 @@ const Paginado = ({
           </ul>
 
           <div>
-            <button type="submit" value="created" onClick={handleFilterCreated} className="create">
+            <button
+              type="submit"
+              value="created"
+              onClick={handleFilterCreated}
+              className="create"
+              // disabled={!charactersExist}
+            >
               <span>DB</span>
             </button>
 
-            <button type="submit" value="all" onClick={handleFilterCreated} className="create">
+            <button
+              type="submit"
+              value="all"
+              onClick={handleFilterCreated}
+              className="create"
+            >
               <span>API</span>
             </button>
 
