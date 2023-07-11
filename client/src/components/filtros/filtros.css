@@ -1,0 +1,70 @@
+.contenedor-principalF{
+  background: #1e2326;
+  width: 240px; /* Ancho del panel */
+  height: 84vh; /* Altura del panel */
+  position: fixed; /* Fijar el panel en la posición */
+  top: 55px; /* Posición vertical del panel debajo de la barra de navegación */
+  left: 0; /* Posición izquierda del panel */
+  padding: 20px; /* Espacio interno del panel */
+  box-sizing: border-box;
+  z-index: 999;
+}
+
+.contenedor-principalE {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 81vh;
+  /* gap: 10%; */
+}
+
+.contenedor-principalE label{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  font-size: 18px;
+  color: white;
+}
+
+.contenedor-principalE .inputSort{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.inputSort input{
+  margin-right: 15px;
+  width: 50px;
+  border-radius: 3px;
+  border: none;
+}
+
+.buttonFilter{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.buttonFilter input{
+  margin-right: 15px;
+  text-transform: uppercase;
+  border-radius: 3px;
+  border: none;
+}
+
+.buttonFilter .right{
+  width: 70px;
+}
+
+.selectFilter{
+ display: flex;
+ flex-direction: column;
+ width: 180px;
+ justify-content: center
+}
+
+.selectFilter select{
+  padding: 2px;
+  height: 25px;
+  border-radius: 5px;
+}

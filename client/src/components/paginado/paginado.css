@@ -7,38 +7,7 @@
   width: 100%;
   padding: 0;
   margin: 0;
-}
-
-.names{
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  height: 45px;
-}
-
-.names input{
-  width: 55px;
-  margin-right: 8px;
-  padding: 2px;
-  font-size: 12px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.5s ease-in;
-  border: none;
-}
-
-.names input:hover{
-  background-color: lightblue;
-}
-
-.names select{
-  width: 135px;
-  padding: 1.5px;
-  outline: none;
-  border: none;
-  border-radius: 5px;
-  font-size: 12px;
-  cursor: pointer;
+  height: 50px;
 }
 
 .create{
@@ -46,16 +15,30 @@
   width: 55px;
 }
 
+.filtrers{
+    width: 50%;
+    position: relative;
+    left: 10%;
+}
+
+.numbers{
+  position: relative;
+    top: -21px;
+    width: 50%;
+    left: 21%;
+}
+
 .paginado ul{
   list-style: none;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
 }
 
 .paginado li{
   margin-left: 10px;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 400;
   cursor: pointer;
   border-radius: 5px;
@@ -64,19 +47,19 @@
 
 .paginado li:hover{
   background-color: lightblue;
+  color: black;
 }
 
 .paginado button{
   width: 55px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.5s ease-in;
   border: none;
-  padding: 2px;
+  background: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  color: white;
 }
 
-.paginado button:hover{
-  background-color: lightblue;
+.btn svg{
+  font-size: 21px;
 }
-
 

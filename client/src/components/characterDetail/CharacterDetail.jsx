@@ -47,12 +47,12 @@ const CharacterDetail = () => {
             <div className="episodes">
               <h2>Episodes</h2>
               <div className="epids">
-                {detalles.episodes &&
+                {/* {detalles.episodes &&
                   detalles.episodes?.map((el, index) => (
                     <ul key={index}>
                       <li>{`${index + 1} - ${el.name ? el.name : el}`}</li>
                     </ul>
-                  ))}
+                  ))} */}
               </div>
             </div>
           </div>

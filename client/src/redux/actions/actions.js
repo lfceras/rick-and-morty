@@ -6,6 +6,9 @@ import {
   CREATE_SUCCESS,
   DELETE_CHARACTER,
   DELETE_FAVORITE,
+  FILTER_BY_GENDER,
+  FILTER_BY_LOCATION,
+  FILTER_BY_SPECIES,
   FILTER_BY_STATUS,
   FILTER_CREATED,
   GET_ALL_CHARACTERS,
@@ -31,7 +34,7 @@ export const getAllCharacters = () => {
       let date = await axios(`http://localhost:8000/characters`);
       let response = date.data.data;
       // console.log(response);
-      // cache.allCharacters = response; // Almacenamos los datos en caché ---> trae conflictos a la hora de aplicar ruta del back para actualizar personajes 
+      // cache.allCharacters = response; // Almacenamos los datos en caché ---> trae conflictos a la hora de aplicar ruta del back para actualizar personajes
       dispatch({
         type: GET_ALL_CHARACTERS,
         payload: response,
@@ -71,7 +74,9 @@ export const getByName = (name) => {
       });
     } catch (error) {
       // console.error(error)
-      alert(error.response?.data?.data.msg);
+      // let err = error.response?.data?.data.msg
+      // alert(err);
+      throw new Error(error);
     }
   };
 };
@@ -143,24 +148,28 @@ export const updateCharacter = (id, updateData) => {
   };
 };
 
-export const deleteCharacter = (id)=>{
-  return async (dispatch)=>{
+export const deleteCharacter = (id) => {
+  return async (dispatch) => {
     try {
-      const confirmed = window.confirm("¿Estás seguro de que deseas eliminar este personaje?")
-      if(!confirmed){
-        return
+      const confirmed = window.confirm(
+        "¿Estás seguro de que deseas eliminar este personaje?"
+      );
+      if (!confirmed) {
+        return;
       }
-      let {data} = await axios.delete(`http://localhost:8000/characters/${id}`)
+      let { data } = await axios.delete(
+        `http://localhost:8000/characters/${id}`
+      );
       dispatch({
         type: DELETE_CHARACTER,
-        payload: id
-      })
+        payload: id,
+      });
     } catch (error) {
-      console.error(error)
-      throw new Error("Error al eliminar el personaje")
+      console.error(error);
+      throw new Error("Error al eliminar el personaje");
     }
-  }
-}
+  };
+};
 
 export const cleanDetails = () => {
   return {
@@ -185,6 +194,27 @@ export const orderByName = (payload) => {
 export const filterByStatus = (payload) => {
   return {
     type: FILTER_BY_STATUS,
+    payload,
+  };
+};
+
+export const filterByGender = (payload) => {
+  return {
+    type: FILTER_BY_GENDER,
+    payload,
+  };
+};
+
+export const filterBySpecies = (payload) => {
+  return {
+    type: FILTER_BY_SPECIES,
+    payload,
+  };
+};
+
+export const filterByLocation = (payload) => {
+  return {
+    type: FILTER_BY_LOCATION,
     payload,
   };
 };

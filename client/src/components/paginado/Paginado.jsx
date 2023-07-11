@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from "react";
 import "./paginado.css";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  filterByStatus,
-  filterCreated,
-  orderByName,
-} from "../../redux/actions/actions";
+import { useState, useEffect } from "react";
+import { VscChromeClose, VscListFilter } from "react-icons/vsc";
+import Filtros from "../filtros/Filtros";
 
 const Paginado = ({
   charactersPerPage,
@@ -18,14 +14,49 @@ const Paginado = ({
   onPrevClick,
   onNextClick,
 }) => {
-  const [orden, setOrden] = useState("");
-  const dispatch = useDispatch();
-
-  let charactersExist = useSelector(state => state.charactersExist)
-
-  // console.log(charactersExist);
-
   const pageNumbers = [];
+  const [open, setOpen] = useState(false);
+
+  const burgerIcon = (
+    <VscListFilter
+      style={{
+        overflow: "visible",
+        color: "white",
+        fill: "white",
+        marginBottom: -23,
+        cursor: "pointer",
+      }}
+      size="25px"
+      onClick={() => setOpen(!open)}
+    />
+  );
+
+  const closeBurger = (
+    <VscChromeClose
+      style={{
+        overflow: "visible",
+        color: "white",
+        fill: "white",
+        marginBottom: -23,
+        cursor: "pointer",
+      }}
+      size="25px"
+      onClick={() => setOpen(!open)}
+    />
+  );
+
+  const handleClickOutside = (event) => {
+    if (!event.target.closest(".filtrers")) {
+      setOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [open]);
 
   for (let i = 1; i <= Math.ceil(characters / charactersPerPage); i++) {
     pageNumbers.push(i);
@@ -60,88 +91,42 @@ const Paginado = ({
     }
   });
 
-  let pageIncrementEllipses = null;
-  if (pageNumbers.length > maxPageLimit) {
-    pageIncrementEllipses = <li onClick={handleNextClick}>&hellip;</li>;
-  }
-  let pageDecremenEllipses = null;
-  if (minPageLimit >= 1) {
-    pageDecremenEllipses = <li onClick={handlePrevClick}>&hellip;</li>;
-  }
-
-  const handleSort = (e) => {
-    dispatch(orderByName(e.target.value));
-    setOrden(`Ordenado ${e.target.value}}`);
-  };
-
-  const handleFiterStatus = (e) => {
-    dispatch(filterByStatus(e.target.value));
-  };
-
-  const handleFilterCreated = (e) => {
-    dispatch(filterCreated(e.target.value));
-  };
+  // let pageIncrementEllipses = null;
+  // if (pageNumbers.length > maxPageLimit) {
+  //   pageIncrementEllipses = <li onClick={handleNextClick}>&hellip;</li>;
+  // }
+  // let pageDecremenEllipses = null;
+  // if (minPageLimit >= 1) {
+  //   pageDecremenEllipses = <li onClick={handlePrevClick}>&hellip;</li>;
+  // }
 
   return (
     <div>
       <div className="paginado">
-        <div className="names">
-          <div>
-            <input type="submit" value="ASC" onClick={(e) => handleSort(e)} />
-            <input type="submit" value="DESC" onClick={(e) => handleSort(e)} />
-          </div>
-
+        <div className="filtrers">
+          {open ? closeBurger : burgerIcon}
+          {open && <Filtros />}
+        </div>
+        <div className="numbers">
           <ul>
-            <li>
-              <button
-                className="btn"
-                onClick={handlePrevClick}
-                disabled={currentPage === pageNumbers[0]}
-              >
-                <FaChevronLeft />
-              </button>
-            </li>
+            <button
+              className="btn"
+              onClick={handlePrevClick}
+              disabled={currentPage === pageNumbers[0]}
+            >
+              <FaChevronLeft />
+            </button>
             {/* {pageDecremenEllipses} */}
             {pageCharacters}
             {/* {pageIncrementEllipses} */}
-            <li>
-              <button
-                className="btn"
-                onClick={handleNextClick}
-                disabled={currentPage === pageNumbers[pageNumbers.length - 1]}
-              >
-                <FaChevronRight />
-              </button>
-            </li>
+            <button
+              className="btn"
+              onClick={handleNextClick}
+              disabled={currentPage === pageNumbers[pageNumbers.length - 1]}
+            >
+              <FaChevronRight />
+            </button>
           </ul>
-
-          <div>
-            <button
-              type="submit"
-              value="created"
-              onClick={handleFilterCreated}
-              className="create"
-              // disabled={!charactersExist}
-            >
-              <span>DB</span>
-            </button>
-
-            <button
-              type="submit"
-              value="all"
-              onClick={handleFilterCreated}
-              className="create"
-            >
-              <span>API</span>
-            </button>
-
-            <select onChange={handleFiterStatus}>
-              <option value="all">Todos</option>
-              <option value="Alive">Vivo</option>
-              <option value="unknown">Desconocido</option>
-              <option value="Dead">Muerto</option>
-            </select>
-          </div>
         </div>
       </div>
     </div>

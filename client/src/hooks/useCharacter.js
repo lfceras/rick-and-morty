@@ -10,9 +10,9 @@ export function useCharacter(){
   const currentPage = useSelector(state => state.currentPage);
 
   const pageNumberLimit = 5;
-  const [charactersPerPage] = useState(20);
-  const indexOfLastCharacter = currentPage * charactersPerPage;
-  const indexOfFirstCharacter = indexOfLastCharacter - charactersPerPage;
+  const [charactersPerPage] = useState(12);   
+  // const indexOfLastCharacter = currentPage * charactersPerPage;
+  // const indexOfFirstCharacter = indexOfLastCharacter - charactersPerPage;
 
   // const currentCharacters = useMemo(
   //   () => characters.slice(indexOfFirstCharacter, indexOfLastCharacter),

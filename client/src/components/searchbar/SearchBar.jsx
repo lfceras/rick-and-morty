@@ -24,16 +24,18 @@ const SearchBar = () => {
       if (value.length) {
         dispatch(getByName(value));
         setLastSearchedCharacter(value);
-      } else if (value.length === 0) {
+      } else if (!value.length && lastSearchedCharacter.length) {
         dispatch(getAllCharacters());
         setLastSearchedCharacter("");
       }
-    }, 500)
+    }, 200)
   ).current;
   
   useEffect(() => {
-    debounceSearch(character);
-  }, [character, debounceSearch, dispatch, lastSearchedCharacter]);
+    if(character !== lastSearchedCharacter){
+      debounceSearch(character);
+    }
+  }, [character, debounceSearch, dispatch, lastSearchedCharacter, lastSearchedCharacter]);
   
   const handleSubmit = useCallback(
     (e) => {
@@ -42,12 +44,12 @@ const SearchBar = () => {
         dispatch(getAllCharacters());
       } else {
         dispatch(getByName(character));
-        setCharacter("");
       }
+      // setCharacter("");
     },
     [character, dispatch]
   );
-  
+
   return (
     <div>
       <form onSubmit={handleSubmit}>

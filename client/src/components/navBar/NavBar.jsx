@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { getAllCharacters } from "../../redux/actions/actions";
-import CreateCharacter from "../createCharacter/CreateCharacter";
 import SearchBar from "../searchbar/SearchBar";
 import "./navBar.css";
 import { RiArrowGoBackLine } from "react-icons/ri";

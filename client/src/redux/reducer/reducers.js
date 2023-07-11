@@ -5,6 +5,9 @@ import {
   CREATE_SUCCESS,
   DELETE_CHARACTER,
   DELETE_FAVORITE,
+  FILTER_BY_GENDER,
+  FILTER_BY_LOCATION,
+  FILTER_BY_SPECIES,
   FILTER_BY_STATUS,
   FILTER_CREATED,
   GET_ALL_CHARACTERS,
@@ -26,7 +29,7 @@ const initialState = {
   episodes: [],
   error: null,
   createSuccess: false,
-  charactersExist: false
+  charactersExist: false,
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -34,7 +37,7 @@ export default function rootReducer(state = initialState, action) {
     case GET_ALL_CHARACTERS:
       const sortedCharacters1 = action.payload.sort((a, b) =>
         a.name.localeCompare(b.name)
-      ); 
+      );
       // ---> con este sorted characters no me permitia hacer el debounce de manera adecuada por eso lo comente
       return {
         ...state,
@@ -74,6 +77,39 @@ export default function rootReducer(state = initialState, action) {
         characters: statusFiltered,
       };
 
+      case FILTER_BY_GENDER:
+        let charactersGender = state.characters2
+        let genderfiltered = 
+        action.payload === "all"
+        ? charactersGender
+        : charactersGender.filter(el => el.gender === action.payload)
+        return{
+          ...state,
+          characters: genderfiltered
+        }
+
+      case FILTER_BY_SPECIES:
+        let characterSpecies = state.characters2
+        let speciefiltered = 
+        action.payload === "all"
+        ? characterSpecies
+        : characterSpecies.filter(el => el.species === action.payload)
+        return{
+          ...state,
+          characters: speciefiltered
+        }
+
+      case FILTER_BY_LOCATION:
+        let characterLocation = state.characters2
+        let locationFiltered = 
+        action.payload === "all"
+        ? characterLocation
+        : characterLocation.filter(el => el.location === action.payload)
+        return{
+          ...state,
+          characters: locationFiltered
+        }
+
     case FILTER_CREATED:
       const personajes = state.characters2;
       const createdFiltered =
@@ -84,7 +120,7 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         characters:
           action.payload === "all" ? state.characters2 : createdFiltered,
-          charactersExist: createdFiltered.length > 0,
+        charactersExist: createdFiltered.length > 0,
       };
 
     case GET_EPISODES:
@@ -106,19 +142,20 @@ export default function rootReducer(state = initialState, action) {
           if (character.id === action.payload.id) {
             return {
               ...character,
-              ...action.payload
-            }
+              ...action.payload,
+            };
           }
           return character;
         }),
       };
-      
 
     case DELETE_CHARACTER:
-    return{
-      ...state,
-      characters: state.characters.filter(character => character.id !== action.payload)
-    }
+      return {
+        ...state,
+        characters: state.characters.filter(
+          (character) => character.id !== action.payload
+        ),
+      };
 
     case CREATE_SUCCESS:
       return {
