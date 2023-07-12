@@ -17,6 +17,7 @@ import {
   GET_EPISODES,
   ORDER_BY_NAME,
   SET_CURRENT_PAGE,
+  SET_FAVORITES,
   UPDATE_CHARACTER,
 } from "../actionsType/actionsType";
 
@@ -226,12 +227,19 @@ export const filterCreated = (payload) => {
   };
 };
 
-export const addFavorite = (payload) => {
+export const addFavorite = (character) => {
   return {
     type: ADD_FAVORITE,
-    payload,
+    payload: character,
   };
 };
+
+export const setFavorites = (favorites)=>{
+  return{
+    type: SET_FAVORITES,
+    payload: favorites
+  }
+}
 
 export const deleteFavorite = (id) => {
   return {

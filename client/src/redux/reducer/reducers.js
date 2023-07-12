@@ -17,6 +17,7 @@ import {
   ORDER_BY_NAME,
   POST_CHARACTERS,
   SET_CURRENT_PAGE,
+  SET_FAVORITES,
   UPDATE_CHARACTER,
 } from "../actionsType/actionsType";
 
@@ -46,12 +47,25 @@ export default function rootReducer(state = initialState, action) {
       };
 
     case ADD_FAVORITE:
-      const { id } = action.payload;
+      // const { id } = action.payload;
+      let favs = state.favorite
+      if(favs.length >= 8){
+        return state
+      }
+      const newFavorite = action.payload
+      const isDuplicated = state.favorite.some((fav)=> fav.id === newFavorite.id)
+      if(!isDuplicated){
+        return{
+          ...state,
+          favorite: [...state.favorite, newFavorite]
+        }
+      }
+      return state;
+
+    case SET_FAVORITES:
       return {
         ...state,
-        favorite: state.favorite.find((el) => el.id === id)
-          ? [...state.favorite]
-          : [...state.favorite, action.payload],
+        favorite: [...state.favorite, ...action.payload],
       };
 
     case ORDER_BY_NAME:
@@ -77,38 +91,38 @@ export default function rootReducer(state = initialState, action) {
         characters: statusFiltered,
       };
 
-      case FILTER_BY_GENDER:
-        let charactersGender = state.characters2
-        let genderfiltered = 
+    case FILTER_BY_GENDER:
+      let charactersGender = state.characters2;
+      let genderfiltered =
         action.payload === "all"
-        ? charactersGender
-        : charactersGender.filter(el => el.gender === action.payload)
-        return{
-          ...state,
-          characters: genderfiltered
-        }
+          ? charactersGender
+          : charactersGender.filter((el) => el.gender === action.payload);
+      return {
+        ...state,
+        characters: genderfiltered,
+      };
 
-      case FILTER_BY_SPECIES:
-        let characterSpecies = state.characters2
-        let speciefiltered = 
+    case FILTER_BY_SPECIES:
+      let characterSpecies = state.characters2;
+      let speciefiltered =
         action.payload === "all"
-        ? characterSpecies
-        : characterSpecies.filter(el => el.species === action.payload)
-        return{
-          ...state,
-          characters: speciefiltered
-        }
+          ? characterSpecies
+          : characterSpecies.filter((el) => el.species === action.payload);
+      return {
+        ...state,
+        characters: speciefiltered,
+      };
 
-      case FILTER_BY_LOCATION:
-        let characterLocation = state.characters2
-        let locationFiltered = 
+    case FILTER_BY_LOCATION:
+      let characterLocation = state.characters2;
+      let locationFiltered =
         action.payload === "all"
-        ? characterLocation
-        : characterLocation.filter(el => el.location === action.payload)
-        return{
-          ...state,
-          characters: locationFiltered
-        }
+          ? characterLocation
+          : characterLocation.filter((el) => el.location === action.payload);
+      return {
+        ...state,
+        characters: locationFiltered,
+      };
 
     case FILTER_CREATED:
       const personajes = state.characters2;
@@ -153,7 +167,7 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         characters: state.characters.filter(
-          (character) => character.id !== action.payload
+          (character) => character.id !== action.payload.id
         ),
       };
 
@@ -173,9 +187,12 @@ export default function rootReducer(state = initialState, action) {
       };
 
     case DELETE_FAVORITE: {
+      const filteredFavorites = state.favorite.filter(
+        (fav) => fav.id !== action.payload
+      );
       return {
         ...state,
-        favorite: state.favorite.filter((el) => el.id !== action.payload),
+        favorite: filteredFavorites,
       };
     }
 

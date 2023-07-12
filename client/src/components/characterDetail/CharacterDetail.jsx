@@ -31,28 +31,40 @@ const CharacterDetail = () => {
         <div className="back-n">
           <div className="principal-character">
             <div className="principal2">
+              <div className="image3">
               <img src={detalles.image} alt={detalles.image} />
-              <h1>{detalles.name}</h1>
-              <h2>{detalles.species}</h2>
+              <span>{detalles.name}</span>
+              </div>
+
+              <div className="detalles1">
+              <label>Species</label>
+              <span>{detalles.species}</span>
               <label>Genero</label>
               <span>{detalles.gender}</span>
+              </div>
+
+              <div className="detalles2">
               <label>Status</label>
               <span>{detalles.status}</span>
               <label>Origen</label>
               <span>{detalles.origin}</span>
+              </div>
+
+              <div className="detalles3">
               <label>Locacion</label>
               <span>{detalles.location}</span>
+              </div>
             </div>
 
-            <div className="episodes">
+            <div className="episodes2">
               <h2>Episodes</h2>
-              <div className="epids">
-                {/* {detalles.episodes &&
+              <div className="epids2">
+                {detalles.episodes &&
                   detalles.episodes?.map((el, index) => (
                     <ul key={index}>
                       <li>{`${index + 1} - ${el.name ? el.name : el}`}</li>
                     </ul>
-                  ))} */}
+                  ))}
               </div>
             </div>
           </div>

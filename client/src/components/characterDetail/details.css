@@ -1,109 +1,108 @@
-.back-n{
-  height: auto;
-  left: 0;
-  width: 100%;
-  margin: 0;
-  /* background-image: url('../../assets/rick5.jpg'); */
-  background-position: cover;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.principal-character{
+.principal2 {
   display: flex;
-  align-items: stretch;
-  justify-content: space-evenly;
-  margin-top: 8.5%;
-  width: 100%;
-  height: auto;
-}
-
-.principal2{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background-color: transparent;
-  width: 260px;
-  height: 400px;  
+  align-items: flex-start;
   background-color: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(0px);
   border-radius: 10px;
-  /* border: 3px solid #fff; */
-}
-
-.principal2:hover{
-  background-color: rgba(255, 255, 255, 0.4);
-  -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(15px);
-}
-
-
-.principal2 img{
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  margin-bottom: 15px;
-  margin-top: 0px;
-}
-
-.principal2 h1{
-  padding: 0;
-  margin: 0;
-  font-size: 20px;
-}
-
-.principal2 h2{
-  padding: 0;
-  margin: 0;
-  font-size: 15px;
-}
-
-.principal2 span{
-  font-size: 20px;
-  margin-bottom: 4px;
+  margin-top: 5%;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 12px;
+  width: 65%;
+  height: 150px;  
 }
 
 .principal2 label{
-  font-size: 15px;
+  font-size: 18px;
 }
 
-.principal-character .episodes{
+.principal2 span{
+  font-size: 16px;
+  padding: 3px;
+}
+
+.image3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: auto;
+  margin-bottom: 5px;
+  margin-left: auto
+}
+
+.image3 span{
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.detalles1{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2%;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 6px;
+}
+
+.detalles2{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 6px;
+}
+
+.detalles3{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 6px;
+}
+
+.principal2 img {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  border: 2px solid rgb(125, 225, 243);
+}
+
+.principal-character .episodes2{
   padding-bottom: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 800px;
+  width: 67.5%;
   height: auto;
-  /* border: 3px solid #fff; */
-  margin-top: 20px;
   background-color: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(0px);
-  border-radius: 10px;
   text-align: justify;
+  margin-left: auto;
+    margin-right: auto;
+    margin-top: 1%;
 }
 
-.principal-character .episodes h2{
+.principal-character .episodes2 h2{
   position: relative;
    margin-top: 0;
-   margin-bottom: 0; 
+   margin-bottom: 5px; 
   }
 
-.principal-character .episodes:hover{
-  background-color: rgba(255, 255, 255, 0.4);
-  -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(15px);
-}
-
-.epids{
+.epids2{
   column-count: 3; /* Número de columnas */
   column-gap: 5px; /* Espacio entre columnas */
   text-align: justify;
   width: auto;
 }
 
-.epids ul{
+.epids2 ul{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -112,6 +111,6 @@
   padding: 0;
 }
 
-.epids ul li{
+.epids2 ul li{
   font-size: 13px;
 }
