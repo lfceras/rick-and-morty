@@ -4,6 +4,7 @@ import Paginado from "../paginado/Paginado";
 import "./characters.css";
 import { useCharacter } from "../../hooks/useCharacter";
 import SpinnerLoading from "../spinnerLoading/SpinnerLoading";
+import { useEffect } from "react";
 
 const CharactersT = () => {
   const {
@@ -19,6 +20,10 @@ const CharactersT = () => {
     pageNumberLimit,
     loading,
   } = useCharacter();
+
+  useEffect(() => {
+    document.title = "Home";
+  }, []);
   
   return (
     <div>

@@ -1,6 +1,6 @@
 import "../createCharacter/createCharacter.css";
 import {useSelector } from "react-redux";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import NavBar from "../navBar/NavBar";
 import {useUpdate} from '../../hooks/useUpdate'
 
@@ -73,6 +73,10 @@ const UpdateCharacter = () => {
       ...prevState,
       episodes: prevState.episodes.filter((occ) => occ !== el),
     }));
+  }, []);
+
+  useEffect(() => {
+    document.title = "Actualizar Personaje";
   }, []);
 
   return (

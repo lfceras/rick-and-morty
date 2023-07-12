@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteFavorite } from "../../redux/actions/actions";
 import NavBar from "../navBar/NavBar";
@@ -14,6 +14,10 @@ const Favorites = () => {
   const deleteFav = (id) => {
     dispatch(deleteFavorite(id));
   };
+
+  useEffect(() => {
+    document.title = "Favoritos";
+  }, []);
 
   return (
     <div>

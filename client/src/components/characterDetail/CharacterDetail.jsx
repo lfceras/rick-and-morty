@@ -21,6 +21,12 @@ const CharacterDetail = () => {
       dispatch(cleanDetails());
     };
   }, [id]);
+
+  useEffect(() => {
+    document.title = "Detalles";
+  }, []);
+
+
   return (
     <div>
       <NavBar />

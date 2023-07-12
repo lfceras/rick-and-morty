@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useCallback } from "react";
 import NavBar from "../navBar/NavBar";
 import { useSubmit } from "../../hooks/useSubmit";
+import { useEffect } from "react";
 
 const CreateCharacter = () => {
   const { formik } = useSubmit();
@@ -128,6 +129,10 @@ const CreateCharacter = () => {
     },
     [formik.values.episodes]
   );
+
+  useEffect(() => {
+    document.title = "Create Character";
+  }, []);
 
   return (
     <div>
