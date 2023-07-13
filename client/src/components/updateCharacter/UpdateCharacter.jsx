@@ -1,79 +1,144 @@
 import "../createCharacter/createCharacter.css";
-import {useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useCallback, useEffect } from "react";
 import NavBar from "../navBar/NavBar";
-import {useUpdate} from '../../hooks/useUpdate'
+import { useUpdate } from "../../hooks/useUpdate";
 
 const UpdateCharacter = () => {
-  const {handleUpdate, input, setInput, errors, loading} = useUpdate()
+  const { formik } = useUpdate();
 
   let episodes = useSelector((state) => state.episodes);
 
-  const handleChange = useCallback((e) => {
-    let val = e.target.value;
-    if (!val.startsWith(" ")) {
-      setInput((prevState) => ({
-        ...prevState,
-        [e.target.name]: val,
-      }));
-    }
-  }, []);
+  // const handleChange = useCallback((e) => {
+  //   let val = e.target.value;
+  //   if (!val.startsWith(" ")) {
+  //     setInput((prevState) => ({
+  //       ...prevState,
+  //       [e.target.name]: val,
+  //     }));
+  //   }
+  // }, []);
 
-  const handleCheked = useCallback((e) => {
-    if (e.target.checked) {
-      setInput((prevState) => ({
-        ...prevState,
-        status: e.target.value,
-      }));
-    }
-  }, []);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    formik.setFieldValue(name, value);
+  };
 
-  const handleChekedGender = useCallback((e) => {
-    if (e.target.checked) {
-      setInput((prevState) => ({
-        ...prevState,
-        gender: e.target.value,
-      }));
-    }
-  }, []);
-
-  const handleSelected = useCallback(
-    (e) => {
-      setInput((prevState) => ({
-        ...prevState,
-        episodes: [...input.episodes, e.target.value],
-      }));
-    },
-    [input.episodes]
-  );
+  // const handleSelectedSpecie = useCallback((e) => {
+  //   setInput((prevState) => ({
+  //     ...prevState,
+  //     species: e.target.value !== "" ? e.target.value : "",
+  //   }));
+  // }, []);
 
   const handleSelectedSpecie = useCallback((e) => {
-    setInput((prevState) => ({
-      ...prevState,
-      species: e.target.value !== "" ? e.target.value : "",
-    }));
+    formik.setFieldValue(
+      "species",
+      e.target.value !== "" ? e.target.value : ""
+    );
   }, []);
+
+  // const handleCheked = useCallback((e) => {
+  //   if (e.target.checked) {
+  //     setInput((prevState) => ({
+  //       ...prevState,
+  //       status: e.target.value,
+  //     }));
+  //   }
+  // }, []);
+
+  const handleChekedStatus = useCallback((e) => {
+    const { value, checked } = e.target;
+    formik.setFieldValue("status", checked ? value : "");
+  }, []);
+
+  // const handleChekedGender = useCallback((e) => {
+  //   if (e.target.checked) {
+  //     setInput((prevState) => ({
+  //       ...prevState,
+  //       gender: e.target.value,
+  //     }));
+  //   }
+  // }, []);
+
+  const handleChekedGender = useCallback((e) => {
+    const { value, checked } = e.target;
+    formik.setFieldValue("gender", checked ? value : "");
+  }, []);
+
+  // const handleSelectedOrigin = useCallback((e) => {
+  //   setInput((prevState) => ({
+  //     ...prevState,
+  //     origin: e.target.value !== "" ? e.target.value : "",
+  //   }));
+  // }, []);
 
   const handleSelectedOrigin = useCallback((e) => {
-    setInput((prevState) => ({
-      ...prevState,
-      origin: e.target.value !== "" ? e.target.value : "",
-    }));
+    formik.setFieldValue("origin", e.target.value !== "" ? e.target.value : "");
   }, []);
+
+  // const handleSelectedLocation = useCallback((e) => {
+  //   setInput((prevState) => ({
+  //     ...prevState,
+  //     location: e.target.value !== "" ? e.target.value : "",
+  //   }));
+  // }, []);
 
   const handleSelectedLocation = useCallback((e) => {
-    setInput((prevState) => ({
-      ...prevState,
-      location: e.target.value !== "" ? e.target.value : "",
-    }));
+    formik.setFieldValue(
+      "location",
+      e.target.value !== "" ? e.target.value : ""
+    );
   }, []);
 
-  const handleDelete = useCallback((el) => {
-    setInput((prevState) => ({
-      ...prevState,
-      episodes: prevState.episodes.filter((occ) => occ !== el),
-    }));
-  }, []);
+  // const handleSelected = useCallback(
+  //   (e) => {
+  //     setInput((prevState) => ({
+  //       ...prevState,
+  //       episodes: [...input.episodes, e.target.value],
+  //     }));
+  //   },
+  //   [input.episodes]
+  // );
+
+  // const handleSelectedEpisodes = useCallback(
+  //   (e) => {
+  //     formik.setFieldValue("episodes", [
+  //       ...formik.values.episodes,
+  //       e.target.value,
+  //     ]);
+  //   },
+  //   [formik.values.episodes]
+  // );
+
+  const handleSelectedEpisodes = useCallback(
+    (e) => {
+      const selectedEpisodeName = e.target.value;
+      if (selectedEpisodeName) {
+        formik.setFieldValue("episodes", [...formik.values.episodes, selectedEpisodeName]);
+      }
+      console.log(formik.values.episodes, "update")
+    },
+    [formik.values.episodes]
+  );
+  
+
+  // const handleDelete = useCallback((el) => {
+  //   setInput((prevState) => ({
+  //     ...prevState,
+  //     episodes: prevState.episodes.filter((occ) => occ !== el),
+  //   }));
+  // }, []);
+
+  const handleDelete = useCallback(
+    (episode) => {
+      const deleteEpisodes = formik.values.episodes.filter(
+        (e) => e !== episode
+      );
+      formik.setFieldValue("episodes", deleteEpisodes);
+    },
+    [formik.values.episodes]
+  );
 
   useEffect(() => {
     document.title = "Actualizar Personaje";
@@ -85,14 +150,14 @@ const UpdateCharacter = () => {
       <div className="container-principal">
         <div className="contenedor-form">
           <h2>Crear Personaje</h2>
-          <form onSubmit={handleUpdate}>
+          <form onSubmit={formik.handleSubmit}>
             <label>
               Name
               <input
                 type="text"
                 name="name"
-                value={input.name}
-                onChange={handleChange}
+                value={formik.values.name}
+                onChange={formik.handleChange}
                 placeholder="Ingresa un nombre"
               />
             </label>
@@ -101,8 +166,9 @@ const UpdateCharacter = () => {
             <label>
               Especie
               <select
+                name="species"
                 onChange={handleSelectedSpecie}
-                value={input.species}
+                value={formik.values.species}
                 className="selects"
               >
                 <option value="">Seleccionar especie</option>
@@ -131,7 +197,8 @@ const UpdateCharacter = () => {
                     type="checkbox"
                     name="Alive"
                     value="Alive"
-                    onChange={handleCheked}
+                    checked={formik.values.status === "Alive"}
+                    onChange={handleChekedStatus}
                   />
                   Vivo
                 </label>
@@ -141,7 +208,8 @@ const UpdateCharacter = () => {
                     id="checkboxUnknown"
                     name="unknown"
                     value="unknown"
-                    onChange={handleCheked}
+                    checked={formik.values.status === "unknown"}
+                    onChange={handleChekedStatus}
                   />
                   Desconocido
                 </label>
@@ -151,7 +219,8 @@ const UpdateCharacter = () => {
                     id="checkboxDead"
                     name="Dead"
                     value="Dead"
-                    onChange={handleCheked}
+                    checked={formik.values.status === "Dead"}
+                    onChange={handleChekedStatus}
                   />
                   Muerto
                 </label>
@@ -168,6 +237,7 @@ const UpdateCharacter = () => {
                     name="Male"
                     value="Male"
                     id="checkboxMale"
+                    checked={formik.values.gender === "Male"}
                     onChange={handleChekedGender}
                   />
                   Hombre
@@ -178,6 +248,7 @@ const UpdateCharacter = () => {
                     name="Female"
                     value="Female"
                     id="checkboxFemale"
+                    checked={formik.values.gender === "Female"}
                     onChange={handleChekedGender}
                   />
                   Mujer
@@ -188,6 +259,7 @@ const UpdateCharacter = () => {
                     name="unknown"
                     value="unknown"
                     id="checkboxunknown"
+                    checked={formik.values.gender === "unknown"}
                     onChange={handleChekedGender}
                   />
                   Desconocido
@@ -198,8 +270,9 @@ const UpdateCharacter = () => {
             {/* ORIGEN */}
             <label>Origen</label>
             <select
+              name="origin"
               onChange={handleSelectedOrigin}
-              value={input.origin}
+              value={formik.values.origin}
               className="selects"
             >
               <option value="">Seleccionar origen</option>
@@ -263,8 +336,9 @@ const UpdateCharacter = () => {
             <label>
               Residencia
               <select
+                name="location"
                 onChange={handleSelectedLocation}
-                value={input.location}
+                value={formik.values.location}
                 className="selects"
               >
                 <option value="">Seleccionar locacion</option>
@@ -285,46 +359,41 @@ const UpdateCharacter = () => {
               <input
                 type="text"
                 name="image"
-                value={input.image}
+                value={formik.values.image}
                 onChange={handleChange}
                 placeholder="Carga una imagen"
               />
             </label>
 
+            {/* EPISODES */}
+
             <div>
-              <select onChange={handleSelected} className="episodes">
+              <select
+                name="episodes"
+                onChange={(e) => handleSelectedEpisodes(e)}
+                className="episodes"
+                disabled={true}
+              >
                 <option value="">Seleccionar episodio</option>
-                {episodes?.map((el) => (
+
+                {episodes &&  episodes?.map((el) => (
                   <option key={el.id} value={el.name}>
                     {el.name}
                   </option>
                 ))}
               </select>
             </div>
-            {
-              loading 
-              ? (<p>Updating.....</p>)
-              : (
-                <button
-              className="btn4"
-              disabled={
-                input.name === "" ||
-                input.species === "" ||
-                input.origin === "" ||
-                input.location === ""
-              }
-            >
+            <button className="btn4" type="submit">
               Actualizar Personaje
             </button>
-              )
-            }
-            
           </form>
 
           <div className="episodes2">
-            {input.episodes?.map((el, index) => (
+            {formik.values.episodes?.map((el, index) => (
               <div key={index} className="inter">
-                <button onClick={() => handleDelete(el)} className="btn5">
+                <button onClick={() => handleDelete(el)} className="btn5"
+                disabled={true}
+                >
                   X
                 </button>
                 <p>{el.name}</p>

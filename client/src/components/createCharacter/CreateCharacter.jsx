@@ -103,12 +103,24 @@ const CreateCharacter = () => {
   //   [formik.values.episodes]
   // );
 
+  // const handleSelectedEpisodes = useCallback(
+  //   (e) => {
+  //     formik.setFieldValue("episodes", [
+  //       ...formik.values.episodes,
+  //       e.target.value,
+  //     ]);
+  //     console.log(formik.values.episodes, "create")
+  //   },
+  //   [formik.values.episodes]
+  // );
+
   const handleSelectedEpisodes = useCallback(
     (e) => {
-      formik.setFieldValue("episodes", [
-        ...formik.values.episodes,
-        e.target.value,
-      ]);
+      const selectedEpisodeName = e.target.value;
+      if (selectedEpisodeName) {
+        formik.setFieldValue("episodes", [...formik.values.episodes, selectedEpisodeName]);
+      }
+      console.log(formik.values.episodes, "create")
     },
     [formik.values.episodes]
   );
@@ -284,8 +296,8 @@ const CreateCharacter = () => {
             {/* ORIGEN */}
             <label>Origen</label>
             <select
-              onChange={handleSelectedOrigin}
               name="origin"
+              onChange={handleSelectedOrigin}
               value={formik.values.origin}
               className="selects"
               onBlur={formik.handleBlur}
@@ -396,6 +408,8 @@ const CreateCharacter = () => {
                 </div>
               ) : null}
             </label>
+
+             {/* EPISODES */}
 
             <div>
               <select

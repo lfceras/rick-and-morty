@@ -74,10 +74,7 @@ export const getByName = (name) => {
         payload: info.data.data,
       });
     } catch (error) {
-      // console.error(error)
-      // let err = error.response?.data?.data.msg
-      // alert(err);
-      throw new Error(error);
+      console.error(error);
     }
   };
 };
@@ -144,10 +141,41 @@ export const updateCharacter = (id, updateData) => {
       });
     } catch (error) {
       console.log(error);
-      throw new Error("Error updating character");
     }
   };
 };
+
+// export const updateCharacter = (id, updateData) => {
+//   return async (dispatch) => {
+//     try {
+//       // Convertir el array de objetos a un array de strings
+//       const updatedEpisodes = updateData.episodes.reduce((acc, episode) => {
+//         if (episode.name) {
+//           acc.push(episode.name);
+//         }
+//         return acc;
+//       }, []);
+
+//       // Actualizar el array de strings en updateData
+//       updateData.episodes = updatedEpisodes;
+
+//       const { data } = await axios.put(
+//         `http://localhost:8000/characters/${id}`,
+//         updateData
+//       );
+
+//       dispatch({
+//         type: UPDATE_CHARACTER,
+//         payload: {
+//           id,
+//           ...updateData,
+//         },
+//       });
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+// };
 
 export const deleteCharacter = (id) => {
   return async (dispatch) => {
@@ -234,12 +262,12 @@ export const addFavorite = (character) => {
   };
 };
 
-export const setFavorites = (favorites)=>{
-  return{
+export const setFavorites = (favorites) => {
+  return {
     type: SET_FAVORITES,
-    payload: favorites
-  }
-}
+    payload: favorites,
+  };
+};
 
 export const deleteFavorite = (id) => {
   return {
