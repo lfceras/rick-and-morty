@@ -3,17 +3,19 @@ import { Link } from "react-router-dom";
 import { addFavorite, deleteCharacter } from "../../redux/actions/actions";
 import "./cardCharacter.css";
 import { BsFillHeartFill } from "react-icons/bs";
+import { RiArrowUpDoubleLine } from "react-icons/ri";
+import { VscChromeClose } from "react-icons/vsc";
 import { useCallback } from "react";
 
 const CardCharacter = ({ id, image, name, species, origin, create }) => {
   const dispatch = useDispatch();
 
-  const favorite = useSelector(state => state.favorite);
+  const favorite = useSelector((state) => state.favorite);
 
   const addFavorites = useCallback(() => {
     const character = { id, image, name, species, origin };
-    if(favorite.length >= 8){
-      alert("No pueden agregar mas personajes")
+    if (favorite.length >= 8) {
+      alert("No pueden agregar mas personajes");
     }
     dispatch(addFavorite(character));
   }, [dispatch, id, image, name, species, origin]);
@@ -29,15 +31,26 @@ const CardCharacter = ({ id, image, name, species, origin, create }) => {
           <img src={image} alt={image} />
         </div>
         <div className="flit-card-back">
-          <button onClick={() => addFavorites()}>
-            <BsFillHeartFill className="hearts" />
-          </button>
+          <BsFillHeartFill className="hearts" onClick={() => addFavorites()} />
+
           {create && (
             <>
               <Link to={`/update/${id}`}>
-                <button>Update</button>
+                <button className="update">Update | <RiArrowUpDoubleLine 
+                  style={{
+                    marginBottom: -4
+                  }}
+                  size={19}
+                /></button>
               </Link>
-              <button onClick={handleDelete}>Delete</button>
+              <button className="delete" onClick={handleDelete}>
+                Delete | <VscChromeClose
+                 style={{
+                  marginBottom: -4
+                }}
+                size={19}
+                />
+              </button>
             </>
           )}
           <Link to={`/details/${id}`} className="link2">

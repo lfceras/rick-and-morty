@@ -33,7 +33,7 @@ const Favorites = () => {
                   </div>
                   <div className="flit-card-back1">
                     <button onClick={() => deleteFav(el.id)}>
-                      <TiDeleteOutline className="delete" />
+                      <TiDeleteOutline className="delete1" />
                     </button>
                     <Link to={`/details/${el.id}`} className="link3">
                       <img src={el.image} alt={el.image} />

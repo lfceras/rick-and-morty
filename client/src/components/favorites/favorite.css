@@ -111,7 +111,7 @@
   border: none;
 }  
 
-.card .flit-card-back1 .delete{
+.card .flit-card-back1 .delete1{
   color: white;
   position: absolute;
   top: 4px;
@@ -121,7 +121,7 @@
   transition: 1s;
 }
 
-.card .flit-card-back1 .delete:hover{
+.card .flit-card-back1 .delete1:hover{
   color: red;
 }
 

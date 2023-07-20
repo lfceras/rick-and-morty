@@ -1,6 +1,6 @@
 import "./paginado.css";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { VscChromeClose, VscListFilter } from "react-icons/vsc";
 import Filtros from "../filtros/Filtros";
 

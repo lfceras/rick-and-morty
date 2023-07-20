@@ -23,27 +23,26 @@ import {
 
 const cache = {}; // Objeto para almacenar en caché los resultados de las llamadas a la API
 
-export const getAllCharacters = () => {
-  return async (dispatch) => {
-    if (cache.allCharacters) {
-      // Si los datos están en caché, los obtenemos de la caché en lugar de hacer una solicitud a la API
+export const getAllCharacters = (name = null)=>{
+  return async (dispatch)=>{
+    try {
+      let response;
+      if(name){
+        response = await axios.get(`http://localhost:8000/characters?name=${name}`)
+      }else{
+        response = await axios.get(`http://localhost:8000/characters`)
+      }
+      const data = response.data.data
+      // console.log(data);
       dispatch({
         type: GET_ALL_CHARACTERS,
-        payload: cache.allCharacters,
-      });
-    } else {
-      let date = await axios(`http://localhost:8000/characters`);
-      let response = date.data.data;
-      // console.log(response);
-      // cache.allCharacters = response; // Almacenamos los datos en caché ---> trae conflictos a la hora de aplicar ruta del back para actualizar personajes
-      dispatch({
-        type: GET_ALL_CHARACTERS,
-        payload: response,
-      });
-      // console.log(date);
+        payload: data
+      })
+    } catch (error) {
+      console.error(error)
     }
-  };
-};
+  }
+}
 
 export const getDetails = (id) => {
   return async (dispatch) => {
@@ -61,20 +60,6 @@ export const getDetails = (id) => {
         type: GET_DETAILS,
         payload: response,
       });
-    }
-  };
-};
-
-export const getByName = (name) => {
-  return async (dispatch) => {
-    try {
-      let info = await axios(`http://localhost:8000/characters?name=${name}`);
-      dispatch({
-        type: GET_BY_NAME,
-        payload: info.data.data,
-      });
-    } catch (error) {
-      console.error(error);
     }
   };
 };

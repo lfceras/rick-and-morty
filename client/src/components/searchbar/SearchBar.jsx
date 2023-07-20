@@ -3,49 +3,72 @@ import "./searchBar.css";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { IconContext } from "react-icons/lib";
 import { useDispatch } from "react-redux";
-import { getAllCharacters, getByName } from "../../redux/actions/actions";
+import { getAllCharacters } from "../../redux/actions/actions";
 import { useCallback } from "react";
-import debounce from 'lodash.debounce'
+import debounce from "lodash.debounce";
 
 const SearchBar = () => {
   const [character, setCharacter] = useState("");
   const [lastSearchedCharacter, setLastSearchedCharacter] = useState("");
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleChange = useCallback((e) => {
-    let valor = e.target.value
-    if(!valor.startsWith(" ")){
-      setCharacter(valor)
+    let valor = e.target.value;
+    if (!valor.startsWith(" ")) {
+      setCharacter(valor);
     }
-  },[])
+  }, []);
+
+  // const debounceSearch = useRef(
+  //   debounce((value) => {
+  //     if (value.length) {
+  //       dispatch(getByName(value));
+  //       setLastSearchedCharacter(value);
+  //     } else if (!value.length && lastSearchedCharacter.length) {
+  //       dispatch(getAllCharacters());
+  //       setLastSearchedCharacter("");
+  //     }
+  //   }, 200)
+  // ).current;
+
+  // useEffect(() => {
+  //   if(character !== lastSearchedCharacter){
+  //     debounceSearch(character);
+  //   }
+  // }, [character, debounceSearch, dispatch, lastSearchedCharacter, lastSearchedCharacter]);
+
+  // const handleSubmit = useCallback(
+  //   (e) => {
+  //     e.preventDefault();
+  //     if (!character.length) {
+  //       dispatch(getAllCharacters());
+  //     } else {
+  //       dispatch(getByName(character));
+  //     }
+  //     // setCharacter("");
+  //   },
+  //   [character, dispatch]
+  // );
 
   const debounceSearch = useRef(
     debounce((value) => {
-      if (value.length) {
-        dispatch(getByName(value));
-        setLastSearchedCharacter(value);
-      } else if (!value.length && lastSearchedCharacter.length) {
-        dispatch(getAllCharacters());
-        setLastSearchedCharacter("");
-      }
-    }, 200)
+      dispatch(getAllCharacters(value));
+      setLastSearchedCharacter(value);
+    }, 400)
   ).current;
-  
+
   useEffect(() => {
-    if(character !== lastSearchedCharacter){
+    if (character !== lastSearchedCharacter) {
       debounceSearch(character);
     }
-  }, [character, debounceSearch, dispatch, lastSearchedCharacter, lastSearchedCharacter]);
-  
+  }, [character, debounceSearch, dispatch, lastSearchedCharacter]);
+
   const handleSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      if (!character.length) {
-        dispatch(getAllCharacters());
-      } else {
-        dispatch(getByName(character));
+      if (character.length) {
+        dispatch(getAllCharacters(character));
       }
-      // setCharacter("");
     },
     [character, dispatch]
   );
@@ -64,7 +87,7 @@ const SearchBar = () => {
             />
             <div className="icon">
               <IconContext.Provider value={{ size: "20px" }}>
-                <BiSearchAlt2/>
+                <BiSearchAlt2 />
               </IconContext.Provider>
             </div>
           </div>

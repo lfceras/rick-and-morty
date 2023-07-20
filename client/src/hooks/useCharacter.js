@@ -8,16 +8,14 @@ export function useCharacter(){
   const dispatch = useDispatch();
   const characters = useSelector((state) => state.characters, shallowEqual);
   const currentPage = useSelector(state => state.currentPage);
+  // console.log(currentPage);
 
   const pageNumberLimit = 5;
-  const [charactersPerPage] = useState(12);   
-  // const indexOfLastCharacter = currentPage * charactersPerPage;
-  // const indexOfFirstCharacter = indexOfLastCharacter - charactersPerPage;
-
-  // const currentCharacters = useMemo(
-  //   () => characters.slice(indexOfFirstCharacter, indexOfLastCharacter),
-  //   [characters, indexOfFirstCharacter, indexOfLastCharacter]
-  // );
+  const charactersPerPage =12
+  const [maxPageLimit, setMaxPageLimit] = useState(pageNumberLimit);
+  const [minPageLimit, setMinPageLimit] = useState(0)
+  const [loading, setLoading] = useState(false) 
+  const [isUnmounted, setIsUnmounted] = useState(false);   
 
   const currentCharacters = useMemo(() => {
     const indexOfLastCharacter = currentPage * charactersPerPage;
@@ -25,10 +23,6 @@ export function useCharacter(){
     return characters.slice(indexOfFirstCharacter, indexOfLastCharacter);
   }, [characters, currentPage, charactersPerPage]);
   
-  const [maxPageLimit, setMaxPageLimit] = useState(5);
-  const [minPageLimit, setMinPageLimit] = useState(0);
-  const [loading, setLoading] = useState(false)
-
   const paginado = useCallback((pageNumber) => {
     dispatch(setCurrentPage(pageNumber))
   },[dispatch])
@@ -50,13 +44,26 @@ export function useCharacter(){
   },[currentPage, maxPageLimit, pageNumberLimit, dispatch])
 
   useEffect(() => {
-    if (characters.length === 0) {
+    if (characters.length === 0 && !loading) {
       setLoading(true)
       dispatch(getAllCharacters()).then(()=>{
       setLoading(false)
       })
     }
-  }, [characters.length, dispatch]); 
+  }, [characters.length, dispatch, loading]); 
+
+
+  // useEffect(()=>{
+  //   return ()=>{
+  //     setIsUnmounted(false)
+  //   }
+  // },[])
+
+  // useEffect(() => {
+  //   return () => {
+  //     dispatch(setCurrentPage(currentPage)); // Restablecer currentPage a la página actual al desmontar el componente
+  //   };
+  // }, [currentPage, dispatch]);
 
   return{
     characters,

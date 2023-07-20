@@ -33,7 +33,7 @@ const CharactersT = () => {
           {loading ? (
             <SpinnerLoading/>
           ) : (
-            currentCharacters?.map((el) => (
+              currentCharacters && currentCharacters?.map((el) => ( 
               <CardCharacter
                 key={el.id}
                 id={el?.id}

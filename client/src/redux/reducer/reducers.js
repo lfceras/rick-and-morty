@@ -42,8 +42,8 @@ export default function rootReducer(state = initialState, action) {
       // ---> con este sorted characters no me permitia hacer el debounce de manera adecuada por eso lo comente
       return {
         ...state,
-        characters: action.payload,
-        characters2: action.payload,
+        characters: sortedCharacters1,
+        characters2: sortedCharacters1,
       };
 
     case ADD_FAVORITE:
@@ -209,17 +209,19 @@ export default function rootReducer(state = initialState, action) {
       };
 
     case SET_CURRENT_PAGE:
+      // console.log('Previo a la actualización: ', state.currentPage);
+      // console.log('Nuevo valor: ', action.payload);
       return {
         ...state,
         currentPage: action.payload,
       };
 
-    case GET_BY_NAME:
-      return {
-        ...state,
-        characters: action.payload,
-        characters2: action.payload,
-      };
+    // case GET_BY_NAME:
+    //   return {
+    //     ...state,
+    //     characters: action.payload,
+    //     characters2: action.payload,
+    //   };
 
     default:
       return state;

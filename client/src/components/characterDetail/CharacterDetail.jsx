@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { cleanDetails, getDetails } from "../../redux/actions/actions";
+import { cleanDetails, getDetails, setCurrentPage} from "../../redux/actions/actions";
 import NavBar from "../navBar/NavBar";
 import "./details.css";
 import SpinnerDetail from "../spinnerLoading/SpinnerDetail";
@@ -10,17 +10,24 @@ const CharacterDetail = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const detalles = useSelector((state) => state.detalles);
-
+  const currentPage = useSelector(state => state.currentPage)
   const dispatch = useDispatch();
+
+  const currentPageRef = useRef(currentPage)
+  // console.log(currentPageRef);
+
   useEffect(() => {
     setLoading(true);
     dispatch(getDetails(id)).then(() => {
       setLoading(false);
     });
     return () => {
+      currentPageRef.current = currentPage; // Mover la actualización de currentPageRef aquí
       dispatch(cleanDetails());
+      dispatch(setCurrentPage(currentPageRef.current))
     };
-  }, [id]);
+  }, [id, currentPage, dispatch]);
+
 
   useEffect(() => {
     document.title = "Detalles";

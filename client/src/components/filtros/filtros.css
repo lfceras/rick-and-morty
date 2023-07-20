@@ -34,10 +34,12 @@
 }
 
 .inputSort input{
-  margin-right: 15px;
-  width: 50px;
-  border-radius: 3px;
+  margin-right: 10px;
+  border-radius: 7px;
   border: none;
+  font-size: 12px;
+  width: 85px;
+  padding: 4px;
 }
 
 .buttonFilter{
@@ -46,14 +48,17 @@
 }
 
 .buttonFilter input{
-  margin-right: 15px;
+  margin-right: 10px;
   text-transform: uppercase;
-  border-radius: 3px;
+  border-radius: 7px;
+  font-size: 12px;
+  width: 85px;
   border: none;
+  padding: 4px;
 }
 
 .buttonFilter .right{
-  width: 70px;
+  width: 80px;
 }
 
 .selectFilter{
