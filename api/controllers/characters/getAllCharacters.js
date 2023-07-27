@@ -105,16 +105,6 @@ module.exports = async (req, res) => {
     );
   }
 
-  // const speciesArray = filteredData.map((el, index) => el.origin);
-  // let norepitions = [...new Set(speciesArray)]
-
-  // console.log(norepitions);
-
-  // const responseObj = {
-  //   characters: filteredData,
-  //   species: norepitons,
-  // };
-
   return filteredData.length
     ? response(res, 200, filteredData)
     : response(res, 404, { msg: "Not Found" });
